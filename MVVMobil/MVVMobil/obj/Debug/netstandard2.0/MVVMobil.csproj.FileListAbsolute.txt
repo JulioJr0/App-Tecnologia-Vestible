@@ -1,0 +1,35 @@
+D:\JULIOREYES\4.SEMESTRE-4\PENDIENTES\Tópicos Avanzados de Programación\MVVMobil\MVVMobil\MVVMobil\bin\Debug\netstandard2.0\MVVMobil.deps.json
+D:\JULIOREYES\4.SEMESTRE-4\PENDIENTES\Tópicos Avanzados de Programación\MVVMobil\MVVMobil\MVVMobil\bin\Debug\netstandard2.0\MVVMobil.dll
+D:\JULIOREYES\4.SEMESTRE-4\PENDIENTES\Tópicos Avanzados de Programación\MVVMobil\MVVMobil\MVVMobil\bin\Debug\netstandard2.0\ref\MVVMobil.dll
+D:\JULIOREYES\4.SEMESTRE-4\PENDIENTES\Tópicos Avanzados de Programación\MVVMobil\MVVMobil\MVVMobil\bin\Debug\netstandard2.0\MVVMobil.pdb
+D:\JULIOREYES\4.SEMESTRE-4\PENDIENTES\Tópicos Avanzados de Programación\MVVMobil\MVVMobil\MVVMobil\obj\Debug\netstandard2.0\MVVMobil.csproj.AssemblyReference.cache
+D:\JULIOREYES\4.SEMESTRE-4\PENDIENTES\Tópicos Avanzados de Programación\MVVMobil\MVVMobil\MVVMobil\obj\Debug\netstandard2.0\MVVMobil.GeneratedMSBuildEditorConfig.editorconfig
+D:\JULIOREYES\4.SEMESTRE-4\PENDIENTES\Tópicos Avanzados de Programación\MVVMobil\MVVMobil\MVVMobil\obj\Debug\netstandard2.0\App.xaml.g.cs
+D:\JULIOREYES\4.SEMESTRE-4\PENDIENTES\Tópicos Avanzados de Programación\MVVMobil\MVVMobil\MVVMobil\obj\Debug\netstandard2.0\MainPage.xaml.g.cs
+D:\JULIOREYES\4.SEMESTRE-4\PENDIENTES\Tópicos Avanzados de Programación\MVVMobil\MVVMobil\MVVMobil\obj\Debug\netstandard2.0\Views\ListaItemsView.xaml.g.cs
+D:\JULIOREYES\4.SEMESTRE-4\PENDIENTES\Tópicos Avanzados de Programación\MVVMobil\MVVMobil\MVVMobil\obj\Debug\netstandard2.0\MVVMobil.AssemblyInfoInputs.cache
+D:\JULIOREYES\4.SEMESTRE-4\PENDIENTES\Tópicos Avanzados de Programación\MVVMobil\MVVMobil\MVVMobil\obj\Debug\netstandard2.0\MVVMobil.AssemblyInfo.cs
+D:\JULIOREYES\4.SEMESTRE-4\PENDIENTES\Tópicos Avanzados de Programación\MVVMobil\MVVMobil\MVVMobil\obj\Debug\netstandard2.0\MVVMobil.csproj.CoreCompileInputs.cache
+D:\JULIOREYES\4.SEMESTRE-4\PENDIENTES\Tópicos Avanzados de Programación\MVVMobil\MVVMobil\MVVMobil\obj\Debug\netstandard2.0\XamlC.stamp
+D:\JULIOREYES\4.SEMESTRE-4\PENDIENTES\Tópicos Avanzados de Programación\MVVMobil\MVVMobil\MVVMobil\obj\Debug\netstandard2.0\MVVMobil.dll
+D:\JULIOREYES\4.SEMESTRE-4\PENDIENTES\Tópicos Avanzados de Programación\MVVMobil\MVVMobil\MVVMobil\obj\Debug\netstandard2.0\ref\MVVMobil.dll
+D:\JULIOREYES\4.SEMESTRE-4\PENDIENTES\Tópicos Avanzados de Programación\MVVMobil\MVVMobil\MVVMobil\obj\Debug\netstandard2.0\MVVMobil.pdb
+D:\JULIOREYES\MVVMobil\MVVMobil\MVVMobil\bin\Debug\netstandard2.0\MVVMobil.deps.json
+D:\JULIOREYES\MVVMobil\MVVMobil\MVVMobil\bin\Debug\netstandard2.0\MVVMobil.dll
+D:\JULIOREYES\MVVMobil\MVVMobil\MVVMobil\bin\Debug\netstandard2.0\ref\MVVMobil.dll
+D:\JULIOREYES\MVVMobil\MVVMobil\MVVMobil\bin\Debug\netstandard2.0\MVVMobil.pdb
+D:\JULIOREYES\MVVMobil\MVVMobil\MVVMobil\obj\Debug\netstandard2.0\MVVMobil.csproj.AssemblyReference.cache
+D:\JULIOREYES\MVVMobil\MVVMobil\MVVMobil\obj\Debug\netstandard2.0\MVVMobil.GeneratedMSBuildEditorConfig.editorconfig
+D:\JULIOREYES\MVVMobil\MVVMobil\MVVMobil\obj\Debug\netstandard2.0\App.xaml.g.cs
+D:\JULIOREYES\MVVMobil\MVVMobil\MVVMobil\obj\Debug\netstandard2.0\MainPage.xaml.g.cs
+D:\JULIOREYES\MVVMobil\MVVMobil\MVVMobil\obj\Debug\netstandard2.0\Views\ListaItemsView.xaml.g.cs
+D:\JULIOREYES\MVVMobil\MVVMobil\MVVMobil\obj\Debug\netstandard2.0\MVVMobil.AssemblyInfoInputs.cache
+D:\JULIOREYES\MVVMobil\MVVMobil\MVVMobil\obj\Debug\netstandard2.0\MVVMobil.AssemblyInfo.cs
+D:\JULIOREYES\MVVMobil\MVVMobil\MVVMobil\obj\Debug\netstandard2.0\MVVMobil.csproj.CoreCompileInputs.cache
+D:\JULIOREYES\MVVMobil\MVVMobil\MVVMobil\obj\Debug\netstandard2.0\XamlC.stamp
+D:\JULIOREYES\MVVMobil\MVVMobil\MVVMobil\obj\Debug\netstandard2.0\MVVMobil.dll
+D:\JULIOREYES\MVVMobil\MVVMobil\MVVMobil\obj\Debug\netstandard2.0\ref\MVVMobil.dll
+D:\JULIOREYES\MVVMobil\MVVMobil\MVVMobil\obj\Debug\netstandard2.0\MVVMobil.pdb
+D:\JULIOREYES\MVVMobil\MVVMobil\MVVMobil\obj\Debug\netstandard2.0\Views\AgregarItemView.xaml.g.cs
+D:\JULIOREYES\MVVMobil\MVVMobil\MVVMobil\obj\Debug\netstandard2.0\Views\EditarItemView.xaml.g.cs
+D:\JULIOREYES\MVVMobil\MVVMobil\MVVMobil\obj\Debug\netstandard2.0\Views\DetallesItemView.xaml.g.cs

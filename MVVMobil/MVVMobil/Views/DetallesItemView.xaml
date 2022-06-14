@@ -1,0 +1,165 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                NavigationPage.HasNavigationBar="False"
+             x:Class="MVVMobil.Views.DetallesItemView">
+    <!-- Grid -->
+    <Grid Margin="0" BackgroundColor="AliceBlue">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <!-- StackLayout ToolBar Personalizada Logo -->
+        <StackLayout Grid.Row="0">
+            <StackLayout Orientation="Horizontal" BackgroundColor="AliceBlue" HeightRequest="50" >
+                <StackLayout.Resources>
+                    <Style TargetType="Image">
+                        <Setter Property="HorizontalOptions" Value="Center"></Setter>
+                        <Setter Property="VerticalOptions" Value="Center"></Setter>
+                        <Setter Property="HorizontalOptions" Value="CenterAndExpand"></Setter>
+                        <Setter Property="Margin" Value="0, 14"></Setter>
+                    </Style>
+
+                </StackLayout.Resources>
+                <Image Source="https://cdn-icons-png.flaticon.com/512/54/54290.png" Margin="0,12"></Image>
+                <Image Source=" https://cdn-icons-png.flaticon.com/512/54/54966.png"></Image>
+                <Image Source="https://1000marcas.net/wp-content/uploads/2019/12/meta-logo.png" HorizontalOptions="Center" Margin="0"></Image>
+                <Image Source="https://cdn-icons-png.flaticon.com/512/54/54481.png"></Image>
+                <Image Source="https://cdn-icons-png.flaticon.com/512/2089/2089433.png" Margin="0,12"></Image>
+            </StackLayout>
+        </StackLayout>
+        <!-- ScrollView de las subcategorias -->
+        <ScrollView Grid.Row="1" BackgroundColor="AliceBlue" Orientation="Horizontal">
+            <StackLayout Orientation="Horizontal">
+                <Label Text="SmartWaches"></Label >
+                <Label Text="Glasses"></Label>
+                <Label Text="Smart Clothing"></Label>
+                <Label Text="IA"></Label>
+                <Label Text="Backpacks And Bags"></Label>
+                <Label Text="Smart Rings"></Label>
+                <Label Text="Wearable" ></Label>
+
+                <StackLayout.Resources>
+                    <Style TargetType="Label">
+                        <Setter Property="VerticalOptions" Value="Center"></Setter>
+                        <Setter Property="TextDecorations" Value="Underline"></Setter>
+                        <Setter Property="FontFamily" Value="BebasNeue-Regular"></Setter>
+                        <Setter Property="FontSize" Value="Medium"></Setter>
+                        <Setter Property="Margin" Value="5,0"></Setter>
+                        <Setter Property="TextColor" Value="Black"></Setter>
+                    </Style>
+                </StackLayout.Resources>
+            </StackLayout>
+        </ScrollView>
+        <!-- ScrollView De los Items BINDING-->
+        <ScrollView Grid.Row="2">
+            <StackLayout>
+                <StackLayout>
+                    <Grid>
+                        <Frame WidthRequest="200" CornerRadius="1" HasShadow="False" BorderColor="#6aa9e9" Padding="5">
+                            <Image Aspect="AspectFit" Source="https://saint-laurent.dam.kering.com/m/7124d3a45f3bed88/Large-534967GIV3F1000_A.jpg">
+                            </Image>
+                        </Frame>
+                    </Grid>
+                    <Label Margin="10,5" Text="CITY BACKPACK IN CANVAS, NYLON AND LEATHER" FontFamily="BIZUDGotic-Regular" FontSize="Large"></Label>
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="End" Margin="0,5,15,5">
+                        <StackLayout.Resources>
+                            <Style TargetType="Image">
+                                <Setter Property="WidthRequest" Value="25"></Setter>
+                                <Setter Property="VerticalOptions" Value="Center"></Setter>
+                            </Style>
+                        </StackLayout.Resources>
+                        <Image Source="https://cdn-icons.flaticon.com/png/512/3984/premium/3984392.png?token=exp=1655174334~hmac=9b14b2ebbbb16eefe065f8755b9084ee"></Image>
+                        <Image Source="https://cdn-icons.flaticon.com/png/512/3984/premium/3984392.png?token=exp=1655174334~hmac=9b14b2ebbbb16eefe065f8755b9084ee"></Image>
+                        <Image Source="https://cdn-icons.flaticon.com/png/512/3984/premium/3984392.png?token=exp=1655174334~hmac=9b14b2ebbbb16eefe065f8755b9084ee"></Image>
+                        <Image Source="https://cdn-icons.flaticon.com/png/512/3984/premium/3984392.png?token=exp=1655174334~hmac=9b14b2ebbbb16eefe065f8755b9084ee"></Image>
+                        <Image Source="https://cdn-icons-png.flaticon.com/512/872/872664.png" VerticalOptions="Center"></Image>
+                        <!--BINDING NÚMERO DE REVIEWS -->
+                        <Label Text="23 Reviews" FontSize="Medium" VerticalOptions="Center"></Label>
+                    </StackLayout>
+                    <Label Text="$499.00 Dollars" FontFamily="SawarabiGothic-Regular" FontSize="Title" HorizontalOptions="End" Margin="0,5,15,5"></Label>
+                    <StackLayout Orientation="Horizontal" Spacing="20" HorizontalOptions="Center"  Margin="10,5">
+
+                        <StackLayout.Resources>
+                            <Style TargetType="Frame">
+                                <Setter Property="HeightRequest" Value="55"></Setter>
+                                <Setter Property="WidthRequest" Value="55"></Setter>
+                                <Setter Property="CornerRadius" Value="250"></Setter>
+                                <Setter Property="HorizontalOptions" Value="Center"></Setter>
+                                <Setter Property="VerticalOptions" Value="Start"></Setter>
+                                <Setter Property="Margin" Value="0"></Setter>
+                                <Setter Property="Padding" Value="0"></Setter>
+                                <Setter Property="BackgroundColor" Value="White"></Setter>
+                            </Style>
+                            <Style TargetType="Label">
+                                <Setter Property="FontSize" Value="Subtitle"></Setter>
+                                <Setter Property="TextColor" Value="Black"></Setter>
+                                <Setter Property="HorizontalOptions" Value="Center"></Setter>
+                                <Setter Property="VerticalOptions" Value="Center"></Setter>
+                                <Setter Property="HorizontalTextAlignment" Value="Center"></Setter>
+                                <Setter Property="VerticalTextAlignment" Value="Center"></Setter>
+                            </Style>
+                        </StackLayout.Resources>
+                        <!--BINDING Talla o Tamaño -->
+                        <Frame BackgroundColor="black">
+                            <Label Text="UX" TextColor="White" />
+                        </Frame>
+                        <Frame  >
+                            <Label Text="XS/S"/>
+                        </Frame>
+                        <Frame >
+                            <Label Text="S/M"/>
+                        </Frame>
+                        <Frame>
+                            <Label Text="M/L"/>
+                        </Frame>
+                        <Frame>
+                            <Label Text="L/XL"/>
+                        </Frame>
+                    </StackLayout>
+                    <!--BINDING DESCRIPCIÓN -->
+                    <Label Text="Description ..." FontSize="Large" Margin="10,5"></Label>
+                    <Label Text="Description ...Description ...Description ...
+                           Description ...Description ...Description ..." FontSize="Medium"  Margin="10,5"></Label>
+                    <Frame HeightRequest="55" WidthRequest="350"  CornerRadius="30" HorizontalOptions="Center" Margin="10,5" Padding="0">
+                        <StackLayout Orientation="Horizontal" HorizontalOptions="Center" VerticalOptions="Center">
+                            <!--BINDING Nombre Empresa Vende -->
+                            <Label Text="Buy it now" FontFamily="SawarabiGothic-Regular" FontSize="Subtitle" TextColor="Black" Margin="0"/>
+                            <Label Text="Shein" FontFamily="SawarabiGothic-Regular" FontSize="Subtitle"  Margin="0"></Label>
+                        </StackLayout>
+                    </Frame>
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                        <StackLayout Orientation="Horizontal" Margin="10,5">
+                            <StackLayout WidthRequest="20" HeightRequest="20" VerticalOptions="Center">
+                                <Image Source="https://cdn-icons.flaticon.com/png/512/2769/premium/2769339.png?token=exp=1655182962~hmac=9f40ed08ff50afe62e2fe4424aecbbda"></Image>
+                            </StackLayout>
+                            <Label VerticalOptions="Center" Text="Free Shipping Available" FontFamily="Mada-ExtraLight" FontSize="Micro"></Label>
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal" Margin="10,5">
+                            <StackLayout WidthRequest="20" HeightRequest="20" VerticalOptions="Center">
+                                <Image Source="https://cdn-icons-png.flaticon.com/512/54/54303.png"></Image>
+                            </StackLayout>
+                            <Label VerticalOptions="Center" Text="Free Returns + Exchanges" FontFamily="Mada-ExtraLight" FontSize="Micro"></Label>
+                        </StackLayout>
+                    </StackLayout>
+
+                    <Line X1="0" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="7" HorizontalOptions="Center"
+                          Y1="20"
+                          X2="400"
+                          Y2="20"
+                          StrokeLineCap="Round"
+                          Stroke="black"
+                          StrokeThickness="1" />
+                    <StackLayout.Resources>
+                        <Style TargetType="Label">
+                            <Setter Property="FontFamily" Value="Mada-ExtraLight"></Setter>
+                            <Setter Property="TextColor" Value="Black"></Setter>
+                            <Setter Property="FontSize" Value="Body"></Setter>
+                        </Style>
+                    </StackLayout.Resources>
+                </StackLayout>
+            </StackLayout>
+        </ScrollView>
+    </Grid>
+</ContentPage>

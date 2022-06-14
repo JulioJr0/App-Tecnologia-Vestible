@@ -1,0 +1,275 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             NavigationPage.HasNavigationBar="False"
+             x:Class="MVVMobil.Views.AgregarItemView">
+
+    <Grid Margin="0" BackgroundColor="#8fe3ff">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <!-- StackLayout ToolBar Personalizada Logo -->
+        <StackLayout Grid.Row="0">
+            <StackLayout Orientation="Horizontal" BackgroundColor="#8fe3ff" HeightRequest="50" >
+                <StackLayout.Resources>
+                    <Style TargetType="Image">
+                        <Setter Property="HorizontalOptions" Value="Center"></Setter>
+                        <Setter Property="VerticalOptions" Value="Center"></Setter>
+                        <Setter Property="HorizontalOptions" Value="CenterAndExpand"></Setter>
+                        <Setter Property="Margin" Value="0, 14"></Setter>
+                    </Style>
+                </StackLayout.Resources>
+                
+                <Image Source="https://cdn-icons-png.flaticon.com/512/54/54290.png" Margin="0,12"></Image>
+                <Image Source=" https://cdn-icons-png.flaticon.com/512/54/54966.png"></Image>
+                <Image Source="https://1000marcas.net/wp-content/uploads/2019/12/meta-logo.png" HorizontalOptions="Center" Margin="0"></Image>
+                <Image Source="https://cdn-icons-png.flaticon.com/512/54/54481.png"></Image>
+                <Image Source="https://cdn-icons-png.flaticon.com/512/2089/2089433.png" Margin="0,12"></Image>
+            </StackLayout>
+        </StackLayout>
+        <!-- ScrollView de las subcategorias -->
+        <StackLayout Grid.Row="1" BackgroundColor="#8fe3ff" Orientation="Horizontal">
+            <Image Source="https://cdn-icons-png.flaticon.com/512/54/54174.png" Margin="20,3"></Image>
+            <Label Text="Enviar a Julio Cesar Reyes Mendoza" TextColor="Black"></Label>
+            <Image Source="https://cdn-icons.flaticon.com/png/512/2989/premium/2989988.png?token=exp=1655188302~hmac=4202df4d3d8cea1002b928831633a7f1" Margin="0,3"></Image>
+            <StackLayout.Resources>
+                    <Style TargetType="Label">
+                        <Setter Property="VerticalOptions" Value="Center"></Setter>
+                        <Setter Property="TextDecorations" Value="Underline"></Setter>
+                        <Setter Property="FontFamily" Value="BIZUDGotic-Regular"></Setter>
+                        <Setter Property="FontSize" Value="Small"></Setter>
+                        <Setter Property="Margin" Value="5,0"></Setter>
+                    </Style>
+            </StackLayout.Resources>
+        </StackLayout>
+        <!-- ScrollView De los Items BINDING-->
+        <ScrollView  Grid.Row="2" BackgroundColor="AliceBlue">
+            <StackLayout Margin="10" Grid.Column="1">
+                <StackLayout>
+                    <Label TextColor="DeepSkyBlue" Text="Add Item" FontFamily="SawarabiGothic-Regular" FontSize="Large" HorizontalTextAlignment="Center"></Label>
+                </StackLayout>
+                <StackLayout Orientation="Horizontal">
+                    <Image Source="https://cdn-icons-png.flaticon.com/512/1246/1246234.png"></Image>
+                    <StackLayout>
+                        <Label Text="Product name:" FontFamily="Rubik-VariableFont_wght"></Label>
+                        <Entry Text="{Binding Item.Nombre_Item}" Placeholder="Example: AERO DYNAMIC SPORTS BRA" TextTransform="Uppercase" ></Entry>
+                    </StackLayout>
+                </StackLayout>
+                <StackLayout Orientation="Horizontal">
+                    <Image Source="https://cdn-icons-png.flaticon.com/512/1246/1246234.png"></Image>
+                    <StackLayout>
+                        <Label Text="Price in dollars"></Label>
+                        <Entry Text="{Binding Item.Precio}" Keyboard="Numeric" Placeholder="Example: 1999.99"></Entry>
+                    </StackLayout>
+                </StackLayout>
+                <StackLayout Orientation="Horizontal">
+                    <Image  Source="https://cdn-icons-png.flaticon.com/512/1246/1246234.png"></Image>
+                    <StackLayout>
+                        <Label Text="Insert image URL:"></Label>
+                        <Entry Keyboard="Url" Placeholder="Example: https://cdn-icons-png.flaticon.com/512/54/54983.png"></Entry>
+                    </StackLayout>
+                </StackLayout>
+                <StackLayout Orientation="Horizontal">
+                    <Image Source="https://cdn-icons-png.flaticon.com/512/1246/1246234.png"></Image>
+                    <StackLayout>
+                        <Label Text="Size"></Label>
+                        <StackLayout Orientation="Horizontal" RadioButtonGroup.GroupName="Sizes" HorizontalOptions="Center">
+                            
+                            <RadioButton x:Name="Medida1" Value="1">
+                                
+                            </RadioButton>
+                            <RadioButton x:Name="Medida2" Value="2">
+                                
+                            </RadioButton>
+                            <RadioButton x:Name="Medida3" Value="3">
+                                
+                            </RadioButton>
+                            <RadioButton x:Name="Medida4" Value="4">
+                                
+                            </RadioButton>
+                            <!--<RadioButton x:Name="Medida 1" Value="1">
+                                <RadioButton.Triggers>
+                                    <DataTrigger TargetType="RadioButton" Binding="{Binding Item.Tamaño}" Value="1">
+                                        <Setter Property="IsChecked" Value="true"></Setter>
+                                    </DataTrigger>
+                                </RadioButton.Triggers>
+                            </RadioButton>-->
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Margin="0,0,0,10">
+                            <Frame>
+                                <Frame.Triggers>
+                                    <DataTrigger TargetType="Frame" Binding="{Binding Item.Tamaño}" Value="0">
+                                        <Setter Property="Background" Value="black"></Setter>
+                                    </DataTrigger>
+                                </Frame.Triggers>
+                                <Label Text="UX" FontSize="Micro" HorizontalTextAlignment="Center"/>
+                            </Frame>
+                            <Frame  >
+                                <Frame.Triggers>
+                                    <DataTrigger TargetType="Frame" Binding="{Binding Item.Tamaño}" Value="1">
+                                        <Setter Property="Background" Value="black"></Setter>
+                                    </DataTrigger>
+                                </Frame.Triggers>
+                                <Label Text="XS/S" FontSize="Micro" HorizontalTextAlignment="Center"/>
+                            </Frame>
+                            <Frame >
+                                <Frame.Triggers>
+                                    <DataTrigger TargetType="Frame" Binding="{Binding Item.Tamaño}" Value="2">
+                                        <Setter Property="Background" Value="black"></Setter>
+                                    </DataTrigger>
+                                </Frame.Triggers>
+                                <Label Text="S/M" FontSize="Micro" HorizontalTextAlignment="Center"/>
+                            </Frame>
+                            <Frame>
+                                <Frame.Triggers>
+                                    <DataTrigger TargetType="Frame" Binding="{Binding Item.Tamaño}" Value="3">
+                                        <Setter Property="Background" Value="black"></Setter>
+                                    </DataTrigger>
+                                </Frame.Triggers>
+                                <Label Text="M/L" FontSize="Micro" HorizontalTextAlignment="Center"/>
+                            </Frame>
+                            <Frame>
+                                <Frame.Triggers>
+                                    <DataTrigger TargetType="Frame" Binding="{Binding Item.Tamaño}" Value="4">
+                                        <Setter Property="Background" Value="black"></Setter>
+                                    </DataTrigger>
+                                </Frame.Triggers>
+                                <Label Text="L/XL" FontSize="Micro" HorizontalTextAlignment="Center"/>
+                            </Frame>
+                        </StackLayout>
+                    </StackLayout>
+                    
+                </StackLayout>
+                <StackLayout Orientation="Horizontal">
+                    <Image Source="https://cdn-icons-png.flaticon.com/512/1246/1246234.png"></Image>
+                    <StackLayout>
+                        <Label Text="Total number of reviews:"></Label>
+                        <Entry Text="{Binding Item.Numero_De_Reviews}" Keyboard="Numeric" Placeholder="Example: 23"></Entry>
+                    </StackLayout>
+                </StackLayout>
+                <StackLayout Orientation="Horizontal">
+                    <Image Source="https://cdn-icons-png.flaticon.com/512/1246/1246234.png"></Image>
+                    <StackLayout>
+                        <Label Text="Company where it is available:"></Label>
+                        <Entry Text="{Binding Item.Nombre_Empresa_Vende}" Placeholder="Example: Amazon"></Entry>
+                    </StackLayout>
+                </StackLayout>
+                <StackLayout Orientation="Horizontal">
+                    <Image Source="https://cdn-icons-png.flaticon.com/512/1246/1246234.png"></Image>
+                    <StackLayout>
+                        <Label Text="Product Details:"></Label>
+                        <Entry Text="{Binding Item.Descripción}" Placeholder="Details"></Entry>
+                    </StackLayout>
+                </StackLayout>
+                <StackLayout Orientation="Horizontal">
+                    <Image Source="https://cdn-icons-png.flaticon.com/512/1246/1246234.png"></Image>
+                    <StackLayout>
+                        <Label Text="Free Shipping Available?"></Label>
+                        <RadioButton GroupName="Free Shippping" Content="Si" Value="true">
+                            <RadioButton.Triggers>
+                                <DataTrigger TargetType="RadioButton" Binding="{Binding Item.Envio_Gratis_SioNo}" Value="True">
+                                    <Setter Property="IsChecked" Value="True"></Setter>
+                                </DataTrigger>
+                            </RadioButton.Triggers>
+                        </RadioButton>
+                        <RadioButton GroupName="Free Shippping" Content="No" Value="false">
+                            <RadioButton.Triggers>
+                                <DataTrigger TargetType="RadioButton" Binding="{Binding Item.Envio_Gratis_SioNo}" Value="False">
+                                    <Setter Property="IsChecked" Value="false"></Setter>
+                                </DataTrigger>
+                            </RadioButton.Triggers>
+                        </RadioButton>
+                    </StackLayout>
+                </StackLayout>
+                <StackLayout Orientation="Horizontal">
+                    <Image Source="https://cdn-icons-png.flaticon.com/512/1246/1246234.png"></Image>
+                    <StackLayout>
+                        <Label Text="Free Returns + Exchanges?"></Label>
+                        <RadioButton GroupName="Free Returns" Content="Si" Value="true">
+                            <RadioButton.Triggers>
+                                <DataTrigger TargetType="RadioButton" Binding="{Binding Item.Devolucion_Gratis_SioNo}" Value="True">
+                                    <Setter Property="IsChecked" Value="True"></Setter>
+                                </DataTrigger>
+                            </RadioButton.Triggers>
+                        </RadioButton>
+                        <RadioButton GroupName="Free Returns" Content="No" Value="false">
+                            <RadioButton.Triggers>
+                                <DataTrigger TargetType="RadioButton" Binding="{Binding Item.Devolucion_Gratis_SioNo}" Value="False">
+                                    <Setter Property="IsChecked" Value="False"></Setter>
+                                </DataTrigger>
+                            </RadioButton.Triggers>
+                        </RadioButton>
+                    </StackLayout>
+                </StackLayout>
+             
+
+                <!--<Entry Text="This is a read-only Entry"
+                 IsReadOnly="true" />-->
+
+                <Label HorizontalOptions="Center" TextColor="Red" FontSize="Small"></Label>
+                <StackLayout.Resources>
+                    <Style TargetType="StackLayout">
+                        <Setter Property="Margin" Value="5,0,0,5"></Setter>
+                    </Style>
+                    <Style TargetType="Entry">
+                        <Setter Property="ClearButtonVisibility" Value="WhileEditing"></Setter>
+                        <Setter Property="IsSpellCheckEnabled" Value="False"></Setter>
+                        <Setter Property="MaxLength" Value="100"></Setter>
+                        <Setter Property="ReturnType" Value="Next"></Setter>
+                        <Setter Property="IsSpellCheckEnabled" Value="False"></Setter>
+                        <Setter Property="TextColor" Value="Tomato"></Setter>
+                        <Setter Property="PlaceholderColor" Value="#bceeff"></Setter>
+                        <Setter Property="Keyboard" Value="Text"></Setter>
+                        <Setter Property="FontFamily" Value="Rubik-VariableFont_wght"></Setter>
+                        <Setter Property="FontSize" Value="Body"></Setter>
+
+                    </Style>
+             
+                    <Style TargetType="Frame">
+                        <Setter Property="HeightRequest" Value="30"></Setter>
+                        <Setter Property="WidthRequest" Value="30"></Setter>
+                        <Setter Property="CornerRadius" Value="20"></Setter>
+                        <Setter Property="HorizontalOptions" Value="Start"></Setter>
+                        <Setter Property="VerticalOptions" Value="Start"></Setter>
+                        <Setter Property="Margin" Value="9,0"></Setter>
+                        <Setter Property="Padding" Value="0"></Setter>
+                        <Setter Property="BackgroundColor" Value="White"></Setter>
+                    </Style>
+                    <Style TargetType="Label">
+                        <Setter Property="VerticalOptions" Value="Center"></Setter>
+                        <Setter Property="TextDecorations" Value="Underline"></Setter>
+                        <Setter Property="FontFamily" Value="Rubik-VariableFont_wght"></Setter>
+                        <Setter Property="FontSize" Value="Medium"></Setter>
+                        <Setter Property="Margin" Value="5,0"></Setter>
+                        <Setter Property="TextColor" Value="Black"></Setter>
+                    </Style>
+                    <Style TargetType="RadioButton">
+                        <Setter Property="Margin" Value="9,0"></Setter>
+                        <Setter Property="TextColor" Value="Black"></Setter>
+
+                    </Style>
+                    <Style TargetType="Image">
+                        <Setter Property="HeightRequest" Value="40"></Setter>
+                        <Setter Property="WidthRequest" Value="40"></Setter>
+                        <Setter Property="VerticalOptions" Value="Start"></Setter>
+                    </Style>
+                </StackLayout.Resources>
+            </StackLayout>
+        </ScrollView>
+       
+        <!-- Botón Flotante -->
+        <Frame HasShadow="False" BorderColor="LightGray" Grid.Row="2" HeightRequest="65" WidthRequest="65" CornerRadius="50" Padding="10" BackgroundColor="LightGray" Margin="0,0,15,15" VerticalOptions="End" HorizontalOptions="End">
+            <ImageButton Command="{Binding AgregarCommand}" Source="https://cdn-icons.flaticon.com/png/512/3114/premium/3114793.png?token=exp=1655182183~hmac=d93724c21756e00413d23adee245c463"></ImageButton>
+            <Frame.Resources>
+                <Style TargetType="ImageButton">
+                    <Setter Property="BorderColor" Value="LightGray"></Setter>
+                    <Setter Property="CornerRadius" Value="40"></Setter>
+                    <Setter Property="BorderWidth" Value="4"></Setter>
+                </Style>
+            </Frame.Resources>
+        </Frame>
+
+    </Grid>
+</ContentPage>

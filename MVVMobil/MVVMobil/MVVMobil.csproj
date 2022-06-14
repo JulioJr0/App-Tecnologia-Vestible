@@ -1,0 +1,56 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <ProduceReferenceAssembly>true</ProduceReferenceAssembly>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DebugType>portable</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Assets\BebasNeue-Regular.ttf" />
+    <None Remove="Fontss\BebasNeue-Regular.ttf" />
+    <None Remove="Fontss\BIZUDGothic-Regular.ttf" />
+    <None Remove="Fontss\Mada-ExtraLight.ttf" />
+    <None Remove="Fontss\Rubik-VariableFont_wght.ttf" />
+    <None Remove="Fontss\SawarabiGothic-Regular.ttf" />
+    <None Remove="Fonts\BebasNeue-Regular.ttf" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Fontss\BebasNeue-Regular.ttf" />
+    <EmbeddedResource Include="Fontss\BIZUDGothic-Regular.ttf" />
+    <EmbeddedResource Include="Fontss\Mada-ExtraLight.ttf" />
+    <EmbeddedResource Include="Fontss\Rubik-VariableFont_wght.ttf" />
+    <EmbeddedResource Include="Fontss\SawarabiGothic-Regular.ttf" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="Xamarin.Forms" Version="5.0.0.2012" />
+    <PackageReference Include="Xamarin.Essentials" Version="1.6.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Assets\BebasNeue-Regular.ttf" />
+    <Resource Include="Fonts\BebasNeue-Regular.ttf" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Views\AgregarItemView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\DetallesItemView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\EditarItemView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\ListaItemsView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+</Project>
