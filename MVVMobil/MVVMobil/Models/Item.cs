@@ -19,4 +19,5 @@ namespace MVVMobil.Models
         //Decimal
         public decimal Precio { get; set; }
     }
+
 }

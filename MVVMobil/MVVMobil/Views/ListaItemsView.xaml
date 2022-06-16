@@ -16,7 +16,7 @@
                              HorizontalOptions="Start">-->
 
     <ContentPage.BindingContext>
-        <viewmodels:ItemsViewModel></viewmodels:ItemsViewModel>
+        <viewmodels:ItemsViewModel x:Name="avm"></viewmodels:ItemsViewModel>
     </ContentPage.BindingContext>
     
     
@@ -150,22 +150,36 @@
                             </StackLayout>
                         </Frame>
                         <StackLayout Orientation="Horizontal" Grid.Column="1" Grid.Row="6" IsVisible="false">
-                            <StackLayout.Triggers>
-                                <DataTrigger TargetType="StackLayout" Binding="{Binding Envio_Gratis_SioNo}" Value="True">
-                                    <Setter Property="IsVisible" Value="true"></Setter>
-                                </DataTrigger>
-                            </StackLayout.Triggers>
+                            <StackLayout.Style>
+                                <Style TargetType="StackLayout">
+                                    <Style.Triggers>
+                                        <DataTrigger TargetType="StackLayout" Binding="{Binding Envio_Gratis_SioNo}" Value="True">
+                                            <Setter Property="IsVisible" Value="true"></Setter>
+                                        </DataTrigger>
+                                        <DataTrigger TargetType="StackLayout" Binding="{Binding Envio_Gratis_SioNo}" Value="false">
+                                            <Setter Property="IsVisible" Value="false"></Setter>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </StackLayout.Style>
                             <StackLayout WidthRequest="20" HeightRequest="20" VerticalOptions="Center">
                                 <Image Source="https://cdn-icons.flaticon.com/png/512/2769/premium/2769339.png?token=exp=1655182962~hmac=9f40ed08ff50afe62e2fe4424aecbbda"></Image>
                             </StackLayout>
                             <Label VerticalOptions="Center" Text="Free Shipping Available" FontFamily="Mada-ExtraLight" FontSize="Micro"></Label>
                         </StackLayout>
                         <StackLayout Orientation="Horizontal" Grid.Column="1" Grid.Row="7" IsVisible="false" >
-                            <StackLayout.Triggers>
-                                <DataTrigger TargetType="StackLayout" Binding="{Binding Devolucion_Gratis_SioNo}" Value="True">
-                                    <Setter Property="IsVisible" Value="true"></Setter>
-                                </DataTrigger>
-                            </StackLayout.Triggers>
+                            <StackLayout.Style>
+                                <Style TargetType="StackLayout">
+                                    <Style.Triggers>
+                                        <DataTrigger TargetType="StackLayout" Binding="{Binding Devolucion_Gratis_SioNo}" Value="True">
+                                            <Setter Property="IsVisible" Value="true"></Setter>
+                                        </DataTrigger>
+                                        <DataTrigger TargetType="StackLayout" Binding="{Binding Devolucion_Gratis_SioNo}" Value="false">
+                                            <Setter Property="IsVisible" Value="false"></Setter>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </StackLayout.Style>
                             <StackLayout WidthRequest="20" HeightRequest="20" VerticalOptions="Center">
                                 <Image Source="https://cdn-icons-png.flaticon.com/512/54/54303.png"></Image>
                             </StackLayout>
@@ -250,7 +264,7 @@
         </ScrollView>
         <!-- Botón Flotante -->
         <Frame HasShadow="False" BorderColor="LightGray" Grid.Row="2" HeightRequest="65" WidthRequest="65" CornerRadius="50" Padding="10" BackgroundColor="LightGray" Margin="0,0,15,15" VerticalOptions="End" HorizontalOptions="End">
-            <ImageButton Command="{Binding CambiarVistaCommand}" CommandParameter="Agregar" Source="https://cdn-icons.flaticon.com/png/512/3114/premium/3114793.png?token=exp=1655182183~hmac=d93724c21756e00413d23adee245c463"></ImageButton>
+            <ImageButton Command="{Binding CambiarVistaCommand}" CommandParameter="Agregar" Source="https://cdn-icons-png.flaticon.com/512/1828/1828919.png"></ImageButton>
             <Frame.Resources>
                 <Style TargetType="ImageButton">
                     <Setter Property="BorderColor" Value="LightGray"></Setter>

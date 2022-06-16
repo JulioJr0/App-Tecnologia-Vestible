@@ -12,29 +12,37 @@ using Xamarin.Forms;
 
 namespace MVVMobil.ViewModels
 {
-    public class ItemsViewModel : INotifyPropertyChanged
+    public class ItemsViewModel : INotifyPropertyChanged, IMultiValueConverter
     {
         //Agregar
         public ObservableCollection<Item> Lista { get; set; } = new ObservableCollection<Item>();
-
+        public ushort Medida { get; set; }
+        public bool EstadoVista { get; set; } = false;
         public Item Item { get; set; } //agregar, editar, eliminar
         public string Error { get; set; } = "";
         public ICommand CambiarVistaCommand { get; set; }
         public ICommand AgregarCommand { get; set; }
-        public ICommand ComprobarMedidaCommand { get; set; }
+        public ICommand ComprobarEnvioGratisCommand { get; set; }
+        public ICommand ComprobarDevolucionGratisCommand { get; set; }
 
-
+        public string[] combinacion = new string[5];
         public ItemsViewModel()
         {
             Deserializar();
             CambiarVistaCommand = new Command<string>(CambiarVista);
-            AgregarCommand = new Command(Agregar);
-            ComprobarMedidaCommand = new Command(ComprobarMedida);
+            AgregarCommand = new Command<object>(Agregar);
+            ComprobarEnvioGratisCommand = new Command<bool>(ComprobarEnvioGratis);
+            ComprobarDevolucionGratisCommand = new Command<bool>(ComprobarDevolucionGratis);
         }
 
-        private void ComprobarMedida(object obj)
+        private void ComprobarDevolucionGratis(bool obj)
         {
             
+        }
+
+        private void ComprobarEnvioGratis(bool obj)
+        {
+
         }
 
         //PAGES
@@ -44,6 +52,7 @@ namespace MVVMobil.ViewModels
 
         private void Agregar(object obj)
         {
+            EstadoVista = true;
             if (Item != null)
             {
                 Error = "";
@@ -61,6 +70,7 @@ namespace MVVMobil.ViewModels
                 }
                 if (string.IsNullOrWhiteSpace(Error)) //Agregar
                 {
+                    Item.Tamaño = Medida;
                     Lista.Add(Item);
                     CambiarVista("Ver");
                     Serializar();
@@ -92,6 +102,8 @@ namespace MVVMobil.ViewModels
         {
             var file = Environment.GetFolderPath(Environment.SpecialFolder.Personal) + "lista.json";
             File.WriteAllText(file, JsonConvert.SerializeObject(Lista));
+            EstadoVista = false;
+
         }
         void Deserializar()
         {
@@ -103,5 +115,56 @@ namespace MVVMobil.ViewModels
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
+        public object Convert(object[] values, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        {
+            bool x0 = (bool)values[0];
+            bool x1 = (bool)values[1];
+            bool x2 = (bool)values[2];
+            bool x3 = (bool)values[3];
+            bool x4 = (bool)values[4];
+            if (!(x0 == false && x1 == false && x2 == false && x3 == false && x4 == false))
+            {
+                try
+                {
+                    if (x0 == true)
+                    {
+                        //string name = values[0].ToString();
+                        //return new Item { Numero_De_Reviews = ushort.Parse(age)};
+                        return Medida = 0;
+
+                    }
+                    else if (x1 == true)
+                    {
+                        return Medida = 1;
+
+                    }
+                    else if (x2 == true)
+                    {
+                        return Medida = 2;
+                    }
+                    else if (x3 == true)
+                    {
+                        return Medida = 3;
+                    }
+                    else if (x4 == true)
+                    {
+                        return Medida = 4;
+
+                    }
+                }
+                catch (NullReferenceException e)
+                {
+                    Error = e.Message; ;
+                    //Code to do something with e
+                }
+                
+            }
+
+            return Medida = 0;
+        }
+        public object[] ConvertBack(object value, Type[] targetTypes, object parameter, System.Globalization.CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
