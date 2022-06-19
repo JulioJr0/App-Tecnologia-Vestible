@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:viewmodels="clr-namespace:MVVMobil.ViewModels" xmlns:system="clr-namespace:System;assembly=mscorlib" x:DataType="viewmodels:ItemsViewModel"
              NavigationPage.HasNavigationBar="False"
-             x:Class="MVVMobil.Views.AgregarItemView">
+             x:Class="MVVMobil.Views.AgregarItemView" x:Name="ventana">
 
     <ContentPage.Resources>
         <ResourceDictionary>
@@ -60,14 +60,14 @@
                     <Image Source="https://cdn-icons-png.flaticon.com/512/1246/1246234.png"></Image>
                     <StackLayout>
                         <Label Text="Product name:" FontFamily="Rubik-VariableFont_wght"></Label>
-                        <Entry Text="{Binding Item.Nombre_Item}" Placeholder="Example: AERO DYNAMIC SPORTS BRA" TextTransform="Uppercase" ></Entry>
+                        <Entry Text="{Binding ItemPrincipal.Nombre_Item}" Placeholder="Example: AERO DYNAMIC SPORTS BRA" TextTransform="Uppercase" ></Entry>
                     </StackLayout>
                 </StackLayout>
                 <StackLayout Orientation="Horizontal">
                     <Image Source="https://cdn-icons-png.flaticon.com/512/1246/1246234.png"></Image>
                     <StackLayout>
                         <Label Text="Price in dollars"></Label>
-                        <Entry Text="{Binding Item.Precio}" Keyboard="Numeric" Placeholder="Example: 1999.99"></Entry>
+                        <Entry Text="{Binding ItemPrincipal.Precio}" Keyboard="Numeric" Placeholder="Example: 1999.99"></Entry>
                     </StackLayout>
                 </StackLayout>
                 <StackLayout Orientation="Horizontal">
@@ -84,7 +84,7 @@
                         <StackLayout x:Name="sta" Orientation="Horizontal" RadioButtonGroup.GroupName="Sizes" HorizontalOptions="Center">
                             <StackLayout.BindingContext>
                                 <!--Instanciar un arreglo en XAML-->
-                                <x:Array Type="{x:Type x:Boolean}">
+                                <x:Array Type="{x:Type x:Boolean}" >
                                     <x:Boolean></x:Boolean>
                                     <x:Boolean></x:Boolean>
                                     <x:Boolean></x:Boolean>
@@ -94,11 +94,11 @@
                             </StackLayout.BindingContext>
                             <!--CONTINIACIÓN DEL PROGRAMA 16/06/22 05:23-->
 
-                            <RadioButton x:Name="Medida1" IsChecked="{Binding [0]}"></RadioButton>
-                            <RadioButton x:Name="Medida2" IsChecked="{Binding [1]}"></RadioButton>
-                            <RadioButton x:Name="Medida3" IsChecked="{Binding [2]}"></RadioButton>
-                            <RadioButton x:Name="Medida4" IsChecked="{Binding [3]}"></RadioButton>
-                            <RadioButton x:Name="Medida5" IsChecked="{Binding [5]}"></RadioButton>
+                            <RadioButton x:Name="Medida1" IsChecked="{Binding Source={x:Reference sta}, Path=BindingContext[0]}"></RadioButton>
+                            <RadioButton x:Name="Medida2" IsChecked="{Binding Source={x:Reference sta}, Path=BindingContext[1]}"></RadioButton>
+                            <RadioButton x:Name="Medida3" IsChecked="{Binding Source={x:Reference sta}, Path=BindingContext[2]}"></RadioButton>
+                            <RadioButton x:Name="Medida4" IsChecked="{Binding Source={x:Reference sta}, Path=BindingContext[3]}"></RadioButton>
+                            <RadioButton x:Name="Medida5" IsChecked="{Binding Source={x:Reference sta}, Path=BindingContext[4]}"></RadioButton>
                         </StackLayout>
                         <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Margin="0,0,0,10">
                             <Frame>
@@ -209,57 +209,55 @@
                     <Image Source="https://cdn-icons-png.flaticon.com/512/1246/1246234.png"></Image>
                     <StackLayout>
                         <Label Text="Total number of reviews:"></Label>
-                        <Entry Text="{Binding Item.Numero_De_Reviews}" Keyboard="Numeric" Placeholder="Example: 23"></Entry>
+                        <Entry Text="{Binding ItemPrincipal.Numero_De_Reviews}" Keyboard="Numeric" Placeholder="Example: 23"></Entry>
                     </StackLayout>
                 </StackLayout>
                 <StackLayout Orientation="Horizontal">
                     <Image Source="https://cdn-icons-png.flaticon.com/512/1246/1246234.png"></Image>
                     <StackLayout>
                         <Label Text="Company where it is available:"></Label>
-                        <Entry Text="{Binding Item.Nombre_Empresa_Vende}" Placeholder="Example: Amazon"></Entry>
+                        <Entry Text="{Binding ItemPrincipal.Nombre_Empresa_Vende}" Placeholder="Example: Amazon"></Entry>
                     </StackLayout>
                 </StackLayout>
                 <StackLayout Orientation="Horizontal">
                     <Image Source="https://cdn-icons-png.flaticon.com/512/1246/1246234.png"></Image>
                     <StackLayout>
                         <Label Text="Product Details:"></Label>
-                        <Entry Text="{Binding Item.Descripción}" Placeholder="Details"></Entry>
+                        <Entry Text="{Binding ItemPrincipal.Descripción}" Placeholder="Details"></Entry>
                     </StackLayout>
                 </StackLayout>
                 <StackLayout Orientation="Horizontal">
                     <Image Source="https://cdn-icons-png.flaticon.com/512/1246/1246234.png"></Image>
-                    <StackLayout>
+                    <StackLayout x:Name="sta2">
+                        <StackLayout.BindingContext>
+                            <!--Instanciar un arreglo en XAML-->
+                            <x:Array Type="{x:Type x:Boolean}">
+                                <x:Boolean></x:Boolean>
+                                <x:Boolean></x:Boolean>
+                            </x:Array>
+                        </StackLayout.BindingContext>
                         <Label Text="Free Shipping Available?"></Label>
-                        <RadioButton GroupName="Free Shippping" Content="Si" Value="true">
-                            <RadioButton.Triggers>
-                                <DataTrigger TargetType="RadioButton" Binding="{Binding Item.Envio_Gratis_SioNo}" Value="true" />
-                            </RadioButton.Triggers>
-                        </RadioButton>
-                        <RadioButton GroupName="Free Shippping" Content="No" Value="false">
-                            <RadioButton.Triggers>
-                                <DataTrigger TargetType="RadioButton" Binding="{Binding Item.Envio_Gratis_SioNo}" Value="false" />
-                            </RadioButton.Triggers>
-                        </RadioButton>
+                        <RadioButton GroupName="Free Shippping" Content="Si" Value="true" IsChecked="{Binding Source={x:Reference sta2}, Path=BindingContext[0]}"></RadioButton>
+                        <RadioButton GroupName="Free Shippping" Content="No" Value="false" IsChecked="{Binding Source={x:Reference sta2}, Path=BindingContext[1]}"></RadioButton>
                     </StackLayout>
                 </StackLayout>
                 <StackLayout Orientation="Horizontal">
                     <Image Source="https://cdn-icons-png.flaticon.com/512/1246/1246234.png"></Image>
-                    <StackLayout>
+                    <StackLayout x:Name="sta3">
+                        <StackLayout.BindingContext>
+                            <!--Instanciar un arreglo en XAML-->
+                            <x:Array Type="{x:Type x:Boolean}">
+                                <x:Boolean></x:Boolean>
+                                <x:Boolean></x:Boolean>
+                            </x:Array>
+                        </StackLayout.BindingContext>
                         <Label Text="Free Returns + Exchanges?"></Label>
-                        <RadioButton GroupName="Free Returns" Content="Si" Value="true">
-                            <RadioButton.Triggers>
-                                <DataTrigger TargetType="RadioButton" Binding="{Binding Item.Devolucion_Gratis_SioNo}" Value="true" />
-                            </RadioButton.Triggers>
-                        </RadioButton>
-                        <RadioButton GroupName="Free Returns" Content="No" Value="false">
-                            <RadioButton.Triggers>
-                                <DataTrigger TargetType="RadioButton" Binding="{Binding Item.Devolucion_Gratis_SioNo}" Value="false" />
-                            </RadioButton.Triggers>
-                        </RadioButton>
+                        <RadioButton GroupName="Free Returns" Content="Si" Value="true" IsChecked="{Binding Source={x:Reference sta3}, Path=BindingContext[0]}"></RadioButton>
+                        <RadioButton GroupName="Free Returns" Content="No" Value="false" IsChecked="{Binding Source={x:Reference sta3}, Path=BindingContext[1]}"></RadioButton>
+                        <!--<RadioButton GroupName="Free Returns" Content="Si" Value="true" IsChecked="{Binding Source={x:Reference sta3}, Path=BindingContext[0]}"></RadioButton>
+                        <RadioButton GroupName="Free Returns" Content="No" Value="false" IsChecked="{Binding Source={x:Reference sta3}, Path=BindingContext[1]}"></RadioButton>-->
                     </StackLayout>
                 </StackLayout>
-
-
                 <!--<Entry Text="This is a read-only Entry"
                  IsReadOnly="true" />-->
 
@@ -279,9 +277,7 @@
                         <Setter Property="Keyboard" Value="Text"></Setter>
                         <Setter Property="FontFamily" Value="Rubik-VariableFont_wght"></Setter>
                         <Setter Property="FontSize" Value="Body"></Setter>
-
                     </Style>
-
                     <Style TargetType="Frame">
                         <Setter Property="HeightRequest" Value="30"></Setter>
                         <Setter Property="WidthRequest" Value="30"></Setter>
@@ -313,17 +309,108 @@
         </ScrollView>
         <!-- Botón Flotante -->
         <Frame HasShadow="False" BorderColor="LightGray" Grid.Row="2" HeightRequest="65" WidthRequest="65" CornerRadius="50" Padding="10" BackgroundColor="LightGray" Margin="0,0,15,15" VerticalOptions="End" HorizontalOptions="End">
-            <ImageButton Command="{Binding AgregarCommand}" Source="https://cdn-icons-png.flaticon.com/512/1828/1828919.png">
+            <ImageButton Clicked="ImageButton_Clicked" Source="https://cdn-icons-png.flaticon.com/512/1828/1828919.png">
+                <!--<ImageButton.Style>
+                    <Style TargetType="ImageButton">
+                        <Setter Property="Command" Value="{Binding CambiarVistaCommand}"></Setter>
+                        <Setter Property="CommandParameter" Value="Agregado1"></Setter>
+                        <Style.Triggers>
+                            <MultiTrigger TargetType="ImageButton">
+                                <MultiTrigger.Conditions>
+                                    <BindingCondition Binding="{Binding EstadoVista}" Value="Agregado1"></BindingCondition>
+                                </MultiTrigger.Conditions>
+                                <MultiTrigger.Setters>
+                                    <Setter Property="Command" Value="{Binding ComprobarEnvioGratisCommand}"></Setter>
+                                    <Setter Property="CommandParameter" Value="{Binding Source={x:Reference sta2}, Path=BindingContext}"></Setter>
+                                </MultiTrigger.Setters>
+                            </MultiTrigger>
+                            <MultiTrigger TargetType="ImageButton">
+                                <MultiTrigger.Conditions>
+                                    <BindingCondition Binding="{Binding EstadoVista}" Value="Agregado2"></BindingCondition>
+                                </MultiTrigger.Conditions>
+                                <MultiTrigger.Setters>
+                                    <Setter Property="Command" Value="{Binding CambiarVistaCommand}"></Setter>
+                                    <Setter Property="CommandParameter" Value="Agregado2"></Setter>
+                                </MultiTrigger.Setters>
+                            </MultiTrigger>
+                            <MultiTrigger TargetType="ImageButton">
+                                <MultiTrigger.Conditions>
+                                    <BindingCondition Binding="{Binding EstadoVista}" Value="Agregado2"></BindingCondition>
+                                </MultiTrigger.Conditions>
+                                <MultiTrigger.Setters>
+                                    <Setter Property="Command" Value="{Binding ComprobarDevolucionesGratisCommand}"></Setter>
+                                    <Setter Property="CommandParameter" Value="{Binding Source={x:Reference sta3}, Path=BindingContext}"></Setter>
+                                    <Setter Property="Command" Value="{Binding CambiarVistaCommand}"></Setter>
+                                    <Setter Property="CommandParameter" Value="Agregado3"></Setter>
+                                </MultiTrigger.Setters>
+                            </MultiTrigger>
+                            
+                            
+                            <MultiTrigger TargetType="ImageButton">
+                                <MultiTrigger.Conditions>
+                                    <BindingCondition Binding="{Binding EstadoVista}" Value="Agregado2"></BindingCondition>
+                                </MultiTrigger.Conditions>
+                                <MultiTrigger.Setters>
+                                    <Setter Property="Command" Value="{Binding ComprobarDevolucionesGratisCommand}"></Setter>
+                                    <Setter Property="CommandParameter" Value="{Binding Source={x:Reference sta3}, Path=BindingContext}"></Setter>
+                                    <Setter Property="Command" Value="{Binding CambiarVistaCommand}"></Setter>
+                                    <Setter Property="CommandParameter" Value="Agregado3"></Setter>
+                                </MultiTrigger.Setters>
+                            </MultiTrigger>
+                            <MultiTrigger TargetType="ImageButton">
+                                <MultiTrigger.Conditions>
+                                    <BindingCondition Binding="{Binding EstadoVista}" Value="Agregado3"></BindingCondition>
+                                </MultiTrigger.Conditions>
+                                <MultiTrigger.Setters>
+                                    <Setter Property="Command" Value="{Binding AgregarCommand}"></Setter>
+                                    <Setter Property="CommandParameter" Value="{Binding Source={x:Reference sta}, Path=BindingContext}"></Setter>
+                                    <Setter Property="Command" Value="{Binding CambiarVistaCommand}"></Setter>
+                                    <Setter Property="CommandParameter" Value="Agregado4"></Setter>
+                                </MultiTrigger.Setters>
+                            </MultiTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </ImageButton.Style>-->
+            </ImageButton>
+
+
+
+            <!--<ImageButton Source="https://cdn-icons-png.flaticon.com/512/1828/1828919.png" >
                 <ImageButton.Style>
                     <Style TargetType="ImageButton">
+                        <Setter Property="Command" Value="{Binding CambiarVistaCommand}"></Setter>
+                        <Setter Property="CommandParameter" Value="Agregado"></Setter>
                         <Style.Triggers>
-                            <DataTrigger TargetType="ImageButton" Binding="{Binding EstadoVista}" Value="true">
+                            <DataTrigger Binding="{Binding EstadoVista}" Value="Agregado">
                                 <Setter Property="Command" Value="{Binding AgregarCommand}"></Setter>
-                                <Setter Property="CommandParameter" Value="{Binding Source={x:Reference sta}}"></Setter>
+                                <Setter Property="CommandParameter" Value="{Binding Source={x:Reference sta}, Path=BindingContext}"></Setter>
                             </DataTrigger>
                         </Style.Triggers>
                     </Style>
                 </ImageButton.Style>
+            </ImageButton>-->
+            <Frame.Resources>
+                <Style TargetType="ImageButton">
+                    <Setter Property="BorderColor" Value="LightGray"></Setter>
+                    <Setter Property="CornerRadius" Value="40"></Setter>
+                    <Setter Property="BorderWidth" Value="4"></Setter>
+                </Style>
+            </Frame.Resources>
+            <!--COMIENZA-->
+        </Frame>
+        <!--<Frame HasShadow="False" BorderColor="LightGray" Grid.Row="2" HeightRequest="65" WidthRequest="65" CornerRadius="50" Padding="10" BackgroundColor="LightGray" Margin="0,0,15,15" VerticalOptions="End" HorizontalOptions="End">
+            <ImageButton Command="{Binding AgregarCommand}" Source="https://cdn-icons-png.flaticon.com/512/1828/1828919.png">
+                <ImageButton.CommandParameter>
+                    <MultiBinding Converter="{StaticResource Key=myPersonConverter}" >
+                        <MultiBinding.Bindings>
+                            <Binding Path="IsChecked" Source="{x:Reference Medida1}" />
+                            <Binding Path="IsChecked" Source="{x:Reference Medida2}" />
+                            <Binding Path="IsChecked" Source="{x:Reference Medida3}" />
+                            <Binding Path="IsChecked" Source="{x:Reference Medida4}" />
+                            <Binding Path="IsChecked" Source="{x:Reference Medida5}" />
+                        </MultiBinding.Bindings>
+                    </MultiBinding>
+                </ImageButton.CommandParameter>
             </ImageButton>
             <Frame.Resources>
                 <Style TargetType="ImageButton">
@@ -332,12 +419,22 @@
                     <Setter Property="BorderWidth" Value="4"></Setter>
                 </Style>
             </Frame.Resources>
-        </Frame>
-
-
-
-        <!-- Botón Flotante -->
-        <!--
+        </Frame>--> 
+        <!--<ImageButton Background="Gold" Padding="30,10">
+                <ImageButton.Style>
+                    <Style TargetType="ImageButton">
+                        <Setter Property="Command" Value="{Binding CambiarVistaCommand}"></Setter>
+                        <Setter Property="CommandParameter" Value="Agregado"></Setter>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding EstadoVista}" Value="Agregado">
+                            <Setter Property="Command" Value="{Binding AgregarCommand}"></Setter>
+                            <Setter Property="CommandParameter" Value="{Binding Source={x:Reference sta}, Path=BindingContext}"></Setter>
+                        </DataTrigger>
+                    </Style.Triggers>
+                   </Style>
+                    </ImageButton.Style>
+            </ImageButton>-->
+        <!-- Botón Flotante
         <Frame HasShadow="False" BorderColor="LightGray" Grid.Row="2" HeightRequest="65" WidthRequest="65" CornerRadius="50" Padding="10" BackgroundColor="LightGray" Margin="0,0,15,15" VerticalOptions="End" HorizontalOptions="End">
             <ImageButton Command="{Binding AgregarCommand}" Source="https://cdn-icons-png.flaticon.com/512/1828/1828919.png">
                 <ImageButton.CommandParameter>

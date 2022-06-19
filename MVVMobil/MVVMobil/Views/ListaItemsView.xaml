@@ -72,7 +72,7 @@
                             <Image Source="https://cdn-icons.flaticon.com/png/512/3984/premium/3984392.png?token=exp=1655174334~hmac=9b14b2ebbbb16eefe065f8755b9084ee"></Image>
                             <Image Source="https://cdn-icons-png.flaticon.com/512/872/872664.png" VerticalOptions="Center"></Image>
                             <!--BINDING NÚMERO DE REVIEWS -->
-                            <Label Text="23 Reviews" FontSize="Default" VerticalOptions="Center"></Label>
+                            <Label FontSize="Default" VerticalOptions="Center" Text="{Binding Numero_De_Reviews}"></Label>
                         </StackLayout>
                         <!--BINDING PRECIO -->
                         <Label Grid.Column="1" Grid.Row="2" Text="{Binding Precio}" FontFamily="SawarabiGothic-Regular" FontSize="Large"></Label>
@@ -258,9 +258,9 @@
         </ScrollView>
         <!-- ScrollView De los Items BINDING-->
         <ScrollView Grid.Row="2" BackgroundColor="#6aa9e9">
-            <ListView ItemsSource="{Binding Lista}" ItemTemplate="{StaticResource Plantilla}">
+            <CollectionView ItemsSource="{Binding Lista}" ItemTemplate="{StaticResource Plantilla}">
                 
-            </ListView>
+            </CollectionView>
         </ScrollView>
         <!-- Botón Flotante -->
         <Frame HasShadow="False" BorderColor="LightGray" Grid.Row="2" HeightRequest="65" WidthRequest="65" CornerRadius="50" Padding="10" BackgroundColor="LightGray" Margin="0,0,15,15" VerticalOptions="End" HorizontalOptions="End">
