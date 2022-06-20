@@ -11,14 +11,18 @@
     </ContentPage.Resources>
 
     <Grid Margin="0" BackgroundColor="#8fe3ff">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
             <RowDefinition Height="30"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <!-- StackLayout ToolBar Personalizada Logo -->
-        <StackLayout Grid.Row="0">
-            <StackLayout Orientation="Horizontal" BackgroundColor="#8fe3ff" HeightRequest="50" >
+        <StackLayout Grid.Row="0" Grid.ColumnSpan="2">
+            <StackLayout Orientation="Horizontal" BackgroundColor="#8fe3ff" HeightRequest="50">
                 <StackLayout.Resources>
                     <Style TargetType="Image">
                         <Setter Property="HorizontalOptions" Value="Center"></Setter>
@@ -36,7 +40,7 @@
             </StackLayout>
         </StackLayout>
         <!-- ScrollView de las subcategorias -->
-        <StackLayout Grid.Row="1" BackgroundColor="#8fe3ff" Orientation="Horizontal">
+        <StackLayout Grid.Row="1" BackgroundColor="#8fe3ff" Orientation="Horizontal" Grid.ColumnSpan="2">
             <Image Source="https://cdn-icons-png.flaticon.com/512/54/54174.png" Margin="20,3"></Image>
             <Label Text="Enviar a Julio Cesar Reyes Mendoza" TextColor="Black"></Label>
             <Image Source="https://cdn-icons.flaticon.com/png/512/2989/premium/2989988.png?token=exp=1655188302~hmac=4202df4d3d8cea1002b928831633a7f1" Margin="0,3"></Image>
@@ -51,242 +55,281 @@
             </StackLayout.Resources>
         </StackLayout>
         <!-- ScrollView De los Items BINDING-->
-        <ScrollView  Grid.Row="2" BackgroundColor="AliceBlue">
-            <StackLayout Margin="10" Grid.Column="1">
+        <ScrollView  Grid.Row="2" BackgroundColor="AliceBlue" Grid.ColumnSpan="2" >
+            <StackLayout Margin="10" BackgroundColor="AliceBlue">
                 <StackLayout>
                     <Label TextColor="DeepSkyBlue" Text="Add Item" FontFamily="SawarabiGothic-Regular" FontSize="Large" HorizontalTextAlignment="Center"></Label>
                 </StackLayout>
-                <StackLayout Orientation="Horizontal">
-                    <Image Source="https://cdn-icons-png.flaticon.com/512/1246/1246234.png"></Image>
-                    <StackLayout>
-                        <Label Text="Product name:" FontFamily="Rubik-VariableFont_wght"></Label>
-                        <Entry Text="{Binding ItemPrincipal.Nombre_Item}" Placeholder="Example: AERO DYNAMIC SPORTS BRA" TextTransform="Uppercase" ></Entry>
+                <Frame>
+                    <StackLayout Orientation="Horizontal">
+                        <Image Source="https://cdn-icons-png.flaticon.com/512/1246/1246234.png"></Image>
+                        <StackLayout >
+                            <Label Text="Product name:"></Label>
+                            <Entry Text="{Binding ItemPrincipal.Nombre_Item}" Placeholder="Example: AERO DYNAMIC SPORTS BRA" TextTransform="Uppercase" ></Entry>
+                        </StackLayout>
                     </StackLayout>
-                </StackLayout>
-                <StackLayout Orientation="Horizontal">
-                    <Image Source="https://cdn-icons-png.flaticon.com/512/1246/1246234.png"></Image>
-                    <StackLayout>
-                        <Label Text="Price in dollars"></Label>
-                        <Entry Text="{Binding ItemPrincipal.Precio}" Keyboard="Numeric" Placeholder="Example: 1999.99"></Entry>
+                </Frame>
+                <Frame>
+                    <StackLayout Orientation="Horizontal">
+                        <Image Source="https://cdn-icons-png.flaticon.com/512/1246/1246234.png"></Image>
+                        <StackLayout>
+                            <Label Text="Price in dollars"></Label>
+                            <Entry Text="{Binding ItemPrincipal.Precio}" Keyboard="Numeric" Placeholder="Example: 1999.99" ></Entry>
+                        </StackLayout>
                     </StackLayout>
-                </StackLayout>
-                <StackLayout Orientation="Horizontal">
-                    <Image  Source="https://cdn-icons-png.flaticon.com/512/1246/1246234.png"></Image>
-                    <StackLayout>
-                        <Label Text="Insert image URL:"></Label>
-                        <Entry Keyboard="Url" Placeholder="Example: https://cdn-icons-png.flaticon.com/512/54/54983.png"></Entry>
+                </Frame>
+                <Frame>
+                    <StackLayout Orientation="Horizontal">
+                        <Image  Source="https://cdn-icons-png.flaticon.com/512/1246/1246234.png"></Image>
+                        <StackLayout>
+                            <Label Text="Insert image URL:"></Label>
+                            <Entry Keyboard="Url" Placeholder="Example: https://cdn-icons-png.flaticon.com/512/54/54983.png"></Entry>
+                        </StackLayout>
                     </StackLayout>
-                </StackLayout>
-                <StackLayout Orientation="Horizontal">
-                    <Image Source="https://cdn-icons-png.flaticon.com/512/1246/1246234.png"></Image>
-                    <StackLayout>
-                        <Label Text="Size"></Label>
-                        <StackLayout x:Name="sta" Orientation="Horizontal" RadioButtonGroup.GroupName="Sizes" HorizontalOptions="Center">
+                </Frame>
+                <Frame>
+                    <StackLayout Orientation="Horizontal">
+                        <Image Source="https://cdn-icons-png.flaticon.com/512/1246/1246234.png"></Image>
+                        <StackLayout>
+                            <Label Text="Size"></Label>
+                            <StackLayout x:Name="sta" Orientation="Horizontal" RadioButtonGroup.GroupName="Sizes" HorizontalOptions="Center">
+                                <StackLayout.BindingContext>
+                                    <!--Instanciar un arreglo en XAML-->
+                                    <x:Array Type="{x:Type x:Boolean}" >
+                                        <x:Boolean></x:Boolean>
+                                        <x:Boolean></x:Boolean>
+                                        <x:Boolean></x:Boolean>
+                                        <x:Boolean></x:Boolean>
+                                        <x:Boolean></x:Boolean>
+                                    </x:Array>
+                                </StackLayout.BindingContext>
+                                <!--CONTINIACIÓN DEL PROGRAMA 16/06/22 05:23-->
+
+                                <RadioButton x:Name="Medida1" IsChecked="{Binding Source={x:Reference sta}, Path=BindingContext[0]}"></RadioButton>
+                                <RadioButton x:Name="Medida2" IsChecked="{Binding Source={x:Reference sta}, Path=BindingContext[1]}"></RadioButton>
+                                <RadioButton x:Name="Medida3" IsChecked="{Binding Source={x:Reference sta}, Path=BindingContext[2]}"></RadioButton>
+                                <RadioButton x:Name="Medida4" IsChecked="{Binding Source={x:Reference sta}, Path=BindingContext[3]}"></RadioButton>
+                                <RadioButton x:Name="Medida5" IsChecked="{Binding Source={x:Reference sta}, Path=BindingContext[4]}"></RadioButton>
+                            </StackLayout>
+                            <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Margin="0,0,0,10">
+                                <Frame>
+                                    <Frame.Triggers>
+                                        <DataTrigger TargetType="Frame" Binding="{Binding Source={x:Reference Medida1}, Path=IsChecked}" Value="true">
+                                            <Setter Property="BackgroundColor" Value="Black" />
+                                        </DataTrigger>
+                                        <DataTrigger TargetType="Frame" Binding="{Binding Source={x:Reference Medida1}, Path=IsChecked}" Value="false">
+                                            <Setter Property="BackgroundColor" Value="white" />
+                                        </DataTrigger>
+                                    </Frame.Triggers>
+                                    <Label Text="UX" FontSize="Micro" HorizontalTextAlignment="Center">
+                                        <Label.Triggers>
+                                            <DataTrigger TargetType="Label" Binding="{Binding Source={x:Reference Medida1}, Path=IsChecked}" Value="true">
+                                                <Setter Property="TextColor" Value="White" />
+                                            </DataTrigger>
+                                            <DataTrigger TargetType="Label" Binding="{Binding Source={x:Reference Medida1}, Path=IsChecked}" Value="false">
+                                                <Setter Property="TextColor" Value="Black" />
+                                            </DataTrigger>
+                                        </Label.Triggers>
+                                    </Label>
+                                </Frame>
+                                <Frame>
+                                    <Frame.Triggers>
+                                        <DataTrigger TargetType="Frame" Binding="{Binding Source={x:Reference Medida2}, Path=IsChecked}" Value="true">
+                                            <Setter Property="BackgroundColor" Value="Black" />
+                                        </DataTrigger>
+                                        <DataTrigger TargetType="Frame" Binding="{Binding Source={x:Reference Medida2}, Path=IsChecked}" Value="false">
+                                            <Setter Property="BackgroundColor" Value="white" />
+                                        </DataTrigger>
+                                    </Frame.Triggers>
+                                    <Label Text="XS/S" FontSize="Micro" HorizontalTextAlignment="Center">
+                                        <Label.Triggers>
+                                            <DataTrigger TargetType="Label" Binding="{Binding Source={x:Reference Medida2}, Path=IsChecked}" Value="true">
+                                                <Setter Property="TextColor" Value="White" />
+                                            </DataTrigger>
+                                            <DataTrigger TargetType="Label" Binding="{Binding Source={x:Reference Medida2}, Path=IsChecked}" Value="false">
+                                                <Setter Property="TextColor" Value="Black" />
+                                            </DataTrigger>
+                                        </Label.Triggers>
+                                    </Label>
+                                </Frame>
+                                <Frame >
+                                    <Frame.Triggers>
+                                        <DataTrigger TargetType="Frame" Binding="{Binding Source={x:Reference Medida3}, Path=IsChecked}" Value="true">
+                                            <Setter Property="BackgroundColor" Value="Black" />
+                                        </DataTrigger>
+                                        <DataTrigger TargetType="Frame" Binding="{Binding Source={x:Reference Medida3}, Path=IsChecked}" Value="false">
+                                            <Setter Property="BackgroundColor" Value="white" />
+                                        </DataTrigger>
+                                    </Frame.Triggers>
+                                    <Label Text="S/M" FontSize="Micro" HorizontalTextAlignment="Center">
+                                        <Label.Triggers>
+                                            <DataTrigger TargetType="Label" Binding="{Binding Source={x:Reference Medida3}, Path=IsChecked}" Value="true">
+                                                <Setter Property="TextColor" Value="White" />
+                                            </DataTrigger>
+                                            <DataTrigger TargetType="Label" Binding="{Binding Source={x:Reference Medida3}, Path=IsChecked}" Value="false">
+                                                <Setter Property="TextColor" Value="Black" />
+                                            </DataTrigger>
+                                        </Label.Triggers>
+                                    </Label>
+                                </Frame>
+                                <Frame>
+                                    <Frame.Triggers>
+                                        <DataTrigger TargetType="Frame" Binding="{Binding Source={x:Reference Medida4}, Path=IsChecked}" Value="true">
+                                            <Setter Property="BackgroundColor" Value="Black" />
+                                        </DataTrigger>
+                                        <DataTrigger TargetType="Frame" Binding="{Binding Source={x:Reference Medida4}, Path=IsChecked}" Value="false">
+                                            <Setter Property="BackgroundColor" Value="white" />
+                                        </DataTrigger>
+                                    </Frame.Triggers>
+                                    <Label Text="M/L" FontSize="Micro" HorizontalTextAlignment="Center">
+                                        <Label.Triggers>
+                                            <DataTrigger TargetType="Label" Binding="{Binding Source={x:Reference Medida4}, Path=IsChecked}" Value="true">
+                                                <Setter Property="TextColor" Value="White" />
+                                            </DataTrigger>
+                                            <DataTrigger TargetType="Label" Binding="{Binding Source={x:Reference Medida4}, Path=IsChecked}" Value="false">
+                                                <Setter Property="TextColor" Value="Black" />
+                                            </DataTrigger>
+                                        </Label.Triggers>
+                                    </Label>
+                                </Frame>
+                                <Frame>
+                                    <Frame.Triggers>
+                                        <DataTrigger TargetType="Frame" Binding="{Binding Source={x:Reference Medida5}, Path=IsChecked}" Value="true">
+                                            <Setter Property="BackgroundColor" Value="Black" />
+                                        </DataTrigger>
+                                        <DataTrigger TargetType="Frame" Binding="{Binding Source={x:Reference Medida5}, Path=IsChecked}" Value="false">
+                                            <Setter Property="BackgroundColor" Value="white" />
+                                        </DataTrigger>
+                                    </Frame.Triggers>
+                                    <Label Text="L/XL" FontSize="Micro" HorizontalTextAlignment="Center">
+                                        <Label.Triggers>
+                                            <DataTrigger TargetType="Label" Binding="{Binding Source={x:Reference Medida5}, Path=IsChecked}" Value="true">
+                                                <Setter Property="TextColor" Value="White" />
+                                            </DataTrigger>
+                                            <DataTrigger TargetType="Label" Binding="{Binding Source={x:Reference Medida5}, Path=IsChecked}" Value="false">
+                                                <Setter Property="TextColor" Value="Black" />
+                                            </DataTrigger>
+                                        </Label.Triggers>
+                                    </Label>
+
+                                </Frame>
+                                <StackLayout.Resources>
+                                    <Style TargetType="Frame">
+                                        <Setter Property="HeightRequest" Value="30"></Setter>
+                                        <Setter Property="WidthRequest" Value="30"></Setter>
+                                        <Setter Property="CornerRadius" Value="20"></Setter>
+                                        <Setter Property="HorizontalOptions" Value="Start"></Setter>
+                                        <Setter Property="VerticalOptions" Value="Start"></Setter>
+                                        <Setter Property="Margin" Value="9,0"></Setter>
+                                        <Setter Property="Padding" Value="0"></Setter>
+                                        <Setter Property="BackgroundColor" Value="White"></Setter>
+                                    </Style>
+                                </StackLayout.Resources>
+
+                            </StackLayout>
+
+                        </StackLayout>
+
+                    </StackLayout>
+                </Frame>
+                <Frame>
+                    <StackLayout Orientation="Horizontal">
+                        <Image Source="https://cdn-icons-png.flaticon.com/512/1246/1246234.png"></Image>
+                        <StackLayout>
+                            <Label Text="Total number of reviews:"></Label>
+                            <Entry Text="{Binding ItemPrincipal.Numero_De_Reviews}" Keyboard="Numeric" Placeholder="Example: 23"></Entry>
+                        </StackLayout>
+                    </StackLayout>
+                </Frame>
+                <Frame>
+                    <StackLayout Orientation="Horizontal">
+                        <Image Source="https://cdn-icons-png.flaticon.com/512/1246/1246234.png"></Image>
+                        <StackLayout>
+                            <Label Text="Company where it is available:"></Label>
+                            <Entry Text="{Binding ItemPrincipal.Nombre_Empresa_Vende}" Placeholder="Example: Amazon"></Entry>
+                        </StackLayout>
+                    </StackLayout>
+                </Frame>
+                <Frame>
+                    <StackLayout Orientation="Horizontal">
+                        <Image Source="https://cdn-icons-png.flaticon.com/512/1246/1246234.png"></Image>
+                        <StackLayout>
+                            <Label Text="Product Details:"></Label>
+                            <Entry Text="{Binding ItemPrincipal.Descripción}" Placeholder="Details"></Entry>
+                        </StackLayout>
+                    </StackLayout>
+                </Frame>
+                <Frame>
+                    <StackLayout Orientation="Horizontal">
+                        <Image Source="https://cdn-icons-png.flaticon.com/512/1246/1246234.png"></Image>
+                        <StackLayout x:Name="sta2">
                             <StackLayout.BindingContext>
                                 <!--Instanciar un arreglo en XAML-->
-                                <x:Array Type="{x:Type x:Boolean}" >
-                                    <x:Boolean></x:Boolean>
-                                    <x:Boolean></x:Boolean>
-                                    <x:Boolean></x:Boolean>
+                                <x:Array Type="{x:Type x:Boolean}">
                                     <x:Boolean></x:Boolean>
                                     <x:Boolean></x:Boolean>
                                 </x:Array>
                             </StackLayout.BindingContext>
-                            <!--CONTINIACIÓN DEL PROGRAMA 16/06/22 05:23-->
-
-                            <RadioButton x:Name="Medida1" IsChecked="{Binding Source={x:Reference sta}, Path=BindingContext[0]}"></RadioButton>
-                            <RadioButton x:Name="Medida2" IsChecked="{Binding Source={x:Reference sta}, Path=BindingContext[1]}"></RadioButton>
-                            <RadioButton x:Name="Medida3" IsChecked="{Binding Source={x:Reference sta}, Path=BindingContext[2]}"></RadioButton>
-                            <RadioButton x:Name="Medida4" IsChecked="{Binding Source={x:Reference sta}, Path=BindingContext[3]}"></RadioButton>
-                            <RadioButton x:Name="Medida5" IsChecked="{Binding Source={x:Reference sta}, Path=BindingContext[4]}"></RadioButton>
-                        </StackLayout>
-                        <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Margin="0,0,0,10">
-                            <Frame>
-                                <Frame.Triggers>
-                                    <DataTrigger TargetType="Frame" Binding="{Binding Source={x:Reference Medida1}, Path=IsChecked}" Value="true">
-                                        <Setter Property="BackgroundColor" Value="Black" />
-                                    </DataTrigger>
-                                    <DataTrigger TargetType="Frame" Binding="{Binding Source={x:Reference Medida1}, Path=IsChecked}" Value="false">
-                                        <Setter Property="BackgroundColor" Value="white" />
-                                    </DataTrigger>
-                                </Frame.Triggers>
-                                <Label Text="UX" FontSize="Micro" HorizontalTextAlignment="Center">
-                                    <Label.Triggers>
-                                        <DataTrigger TargetType="Label" Binding="{Binding Source={x:Reference Medida1}, Path=IsChecked}" Value="true">
-                                            <Setter Property="TextColor" Value="White" />
-                                        </DataTrigger>
-                                        <DataTrigger TargetType="Label" Binding="{Binding Source={x:Reference Medida1}, Path=IsChecked}" Value="false">
-                                            <Setter Property="TextColor" Value="Black" />
-                                        </DataTrigger>
-                                    </Label.Triggers>
-                                </Label>
-                            </Frame>
-                            <Frame>
-                                <Frame.Triggers>
-                                    <DataTrigger TargetType="Frame" Binding="{Binding Source={x:Reference Medida2}, Path=IsChecked}" Value="true">
-                                        <Setter Property="BackgroundColor" Value="Black" />
-                                    </DataTrigger>
-                                    <DataTrigger TargetType="Frame" Binding="{Binding Source={x:Reference Medida2}, Path=IsChecked}" Value="false">
-                                        <Setter Property="BackgroundColor" Value="white" />
-                                    </DataTrigger>
-                                </Frame.Triggers>
-                                <Label Text="XS/S" FontSize="Micro" HorizontalTextAlignment="Center">
-                                    <Label.Triggers>
-                                        <DataTrigger TargetType="Label" Binding="{Binding Source={x:Reference Medida2}, Path=IsChecked}" Value="true">
-                                            <Setter Property="TextColor" Value="White" />
-                                        </DataTrigger>
-                                        <DataTrigger TargetType="Label" Binding="{Binding Source={x:Reference Medida2}, Path=IsChecked}" Value="false">
-                                            <Setter Property="TextColor" Value="Black" />
-                                        </DataTrigger>
-                                    </Label.Triggers>
-                                </Label>
-                            </Frame>
-                            <Frame >
-                                <Frame.Triggers>
-                                    <DataTrigger TargetType="Frame" Binding="{Binding Source={x:Reference Medida3}, Path=IsChecked}" Value="true">
-                                        <Setter Property="BackgroundColor" Value="Black" />
-                                    </DataTrigger>
-                                    <DataTrigger TargetType="Frame" Binding="{Binding Source={x:Reference Medida3}, Path=IsChecked}" Value="false">
-                                        <Setter Property="BackgroundColor" Value="white" />
-                                    </DataTrigger>
-                                </Frame.Triggers>
-                                <Label Text="S/M" FontSize="Micro" HorizontalTextAlignment="Center">
-                                    <Label.Triggers>
-                                        <DataTrigger TargetType="Label" Binding="{Binding Source={x:Reference Medida3}, Path=IsChecked}" Value="true">
-                                            <Setter Property="TextColor" Value="White" />
-                                        </DataTrigger>
-                                        <DataTrigger TargetType="Label" Binding="{Binding Source={x:Reference Medida3}, Path=IsChecked}" Value="false">
-                                            <Setter Property="TextColor" Value="Black" />
-                                        </DataTrigger>
-                                    </Label.Triggers>
-                                </Label>
-                            </Frame>
-                            <Frame>
-                                <Frame.Triggers>
-                                    <DataTrigger TargetType="Frame" Binding="{Binding Source={x:Reference Medida4}, Path=IsChecked}" Value="true">
-                                        <Setter Property="BackgroundColor" Value="Black" />
-                                    </DataTrigger>
-                                    <DataTrigger TargetType="Frame" Binding="{Binding Source={x:Reference Medida4}, Path=IsChecked}" Value="false">
-                                        <Setter Property="BackgroundColor" Value="white" />
-                                    </DataTrigger>
-                                </Frame.Triggers>
-                                <Label Text="M/L" FontSize="Micro" HorizontalTextAlignment="Center">
-                                    <Label.Triggers>
-                                        <DataTrigger TargetType="Label" Binding="{Binding Source={x:Reference Medida4}, Path=IsChecked}" Value="true">
-                                            <Setter Property="TextColor" Value="White" />
-                                        </DataTrigger>
-                                        <DataTrigger TargetType="Label" Binding="{Binding Source={x:Reference Medida4}, Path=IsChecked}" Value="false">
-                                            <Setter Property="TextColor" Value="Black" />
-                                        </DataTrigger>
-                                    </Label.Triggers>
-                                </Label>
-                            </Frame>
-                            <Frame>
-                                <Frame.Triggers>
-                                    <DataTrigger TargetType="Frame" Binding="{Binding Source={x:Reference Medida5}, Path=IsChecked}" Value="true">
-                                        <Setter Property="BackgroundColor" Value="Black" />
-                                    </DataTrigger>
-                                    <DataTrigger TargetType="Frame" Binding="{Binding Source={x:Reference Medida5}, Path=IsChecked}" Value="false">
-                                        <Setter Property="BackgroundColor" Value="white" />
-                                    </DataTrigger>
-                                </Frame.Triggers>
-                                <Label Text="L/XL" FontSize="Micro" HorizontalTextAlignment="Center">
-                                    <Label.Triggers>
-                                        <DataTrigger TargetType="Label" Binding="{Binding Source={x:Reference Medida5}, Path=IsChecked}" Value="true">
-                                            <Setter Property="TextColor" Value="White" />
-                                        </DataTrigger>
-                                        <DataTrigger TargetType="Label" Binding="{Binding Source={x:Reference Medida5}, Path=IsChecked}" Value="false">
-                                            <Setter Property="TextColor" Value="Black" />
-                                        </DataTrigger>
-                                    </Label.Triggers>
-                                </Label>
-                            </Frame>
+                            <Label Text="Free Shipping Available?"></Label>
+                            <RadioButton GroupName="Free Shippping" Content="Yes" Value="true" IsChecked="{Binding Source={x:Reference sta2}, Path=BindingContext[0]}"></RadioButton>
+                            <RadioButton GroupName="Free Shippping" Content="No" Value="false" IsChecked="{Binding Source={x:Reference sta2}, Path=BindingContext[1]}"></RadioButton>
                         </StackLayout>
                     </StackLayout>
-
-                </StackLayout>
-                <StackLayout Orientation="Horizontal">
-                    <Image Source="https://cdn-icons-png.flaticon.com/512/1246/1246234.png"></Image>
-                    <StackLayout>
-                        <Label Text="Total number of reviews:"></Label>
-                        <Entry Text="{Binding ItemPrincipal.Numero_De_Reviews}" Keyboard="Numeric" Placeholder="Example: 23"></Entry>
-                    </StackLayout>
-                </StackLayout>
-                <StackLayout Orientation="Horizontal">
-                    <Image Source="https://cdn-icons-png.flaticon.com/512/1246/1246234.png"></Image>
-                    <StackLayout>
-                        <Label Text="Company where it is available:"></Label>
-                        <Entry Text="{Binding ItemPrincipal.Nombre_Empresa_Vende}" Placeholder="Example: Amazon"></Entry>
-                    </StackLayout>
-                </StackLayout>
-                <StackLayout Orientation="Horizontal">
-                    <Image Source="https://cdn-icons-png.flaticon.com/512/1246/1246234.png"></Image>
-                    <StackLayout>
-                        <Label Text="Product Details:"></Label>
-                        <Entry Text="{Binding ItemPrincipal.Descripción}" Placeholder="Details"></Entry>
-                    </StackLayout>
-                </StackLayout>
-                <StackLayout Orientation="Horizontal">
-                    <Image Source="https://cdn-icons-png.flaticon.com/512/1246/1246234.png"></Image>
-                    <StackLayout x:Name="sta2">
-                        <StackLayout.BindingContext>
-                            <!--Instanciar un arreglo en XAML-->
-                            <x:Array Type="{x:Type x:Boolean}">
-                                <x:Boolean></x:Boolean>
-                                <x:Boolean></x:Boolean>
-                            </x:Array>
-                        </StackLayout.BindingContext>
-                        <Label Text="Free Shipping Available?"></Label>
-                        <RadioButton GroupName="Free Shippping" Content="Si" Value="true" IsChecked="{Binding Source={x:Reference sta2}, Path=BindingContext[0]}"></RadioButton>
-                        <RadioButton GroupName="Free Shippping" Content="No" Value="false" IsChecked="{Binding Source={x:Reference sta2}, Path=BindingContext[1]}"></RadioButton>
-                    </StackLayout>
-                </StackLayout>
-                <StackLayout Orientation="Horizontal">
-                    <Image Source="https://cdn-icons-png.flaticon.com/512/1246/1246234.png"></Image>
-                    <StackLayout x:Name="sta3">
-                        <StackLayout.BindingContext>
-                            <!--Instanciar un arreglo en XAML-->
-                            <x:Array Type="{x:Type x:Boolean}">
-                                <x:Boolean></x:Boolean>
-                                <x:Boolean></x:Boolean>
-                            </x:Array>
-                        </StackLayout.BindingContext>
-                        <Label Text="Free Returns + Exchanges?"></Label>
-                        <RadioButton GroupName="Free Returns" Content="Si" Value="true" IsChecked="{Binding Source={x:Reference sta3}, Path=BindingContext[0]}"></RadioButton>
-                        <RadioButton GroupName="Free Returns" Content="No" Value="false" IsChecked="{Binding Source={x:Reference sta3}, Path=BindingContext[1]}"></RadioButton>
-                        <!--<RadioButton GroupName="Free Returns" Content="Si" Value="true" IsChecked="{Binding Source={x:Reference sta3}, Path=BindingContext[0]}"></RadioButton>
+                </Frame>
+                <Frame>
+                    <StackLayout Orientation="Horizontal">
+                        <Image Source="https://cdn-icons-png.flaticon.com/512/1246/1246234.png"></Image>
+                        <StackLayout x:Name="sta3">
+                            <StackLayout.BindingContext>
+                                <!--Instanciar un arreglo en XAML-->
+                                <x:Array Type="{x:Type x:Boolean}">
+                                    <x:Boolean></x:Boolean>
+                                    <x:Boolean></x:Boolean>
+                                </x:Array>
+                            </StackLayout.BindingContext>
+                            <Label Text="Free Returns + Exchanges?"></Label>
+                            <RadioButton GroupName="Free Returns" Content="Yes" Value="true" IsChecked="{Binding Source={x:Reference sta3}, Path=BindingContext[0]}"></RadioButton>
+                            <RadioButton GroupName="Free Returns" Content="No" Value="false" IsChecked="{Binding Source={x:Reference sta3}, Path=BindingContext[1]}"></RadioButton>
+                            <!--<RadioButton GroupName="Free Returns" Content="Si" Value="true" IsChecked="{Binding Source={x:Reference sta3}, Path=BindingContext[0]}"></RadioButton>
                         <RadioButton GroupName="Free Returns" Content="No" Value="false" IsChecked="{Binding Source={x:Reference sta3}, Path=BindingContext[1]}"></RadioButton>-->
+                        </StackLayout>
                     </StackLayout>
-                </StackLayout>
+                    
+                </Frame>
+                <Label HorizontalOptions="Center" TextColor="Red" FontSize="Small" Text="{Binding Error}"></Label>
+
                 <!--<Entry Text="This is a read-only Entry"
                  IsReadOnly="true" />-->
 
-                <Label HorizontalOptions="Center" TextColor="Red" FontSize="Small"></Label>
                 <StackLayout.Resources>
                     <Style TargetType="StackLayout">
-                        <Setter Property="Margin" Value="5,0,0,5"></Setter>
+                        <Setter Property="Margin" Value="0,0,0,5"></Setter>
+                        <!--<Setter Property="BackgroundColor" Value="Chocolate"></Setter>-->
                     </Style>
                     <Style TargetType="Entry">
                         <Setter Property="ClearButtonVisibility" Value="WhileEditing"></Setter>
                         <Setter Property="IsSpellCheckEnabled" Value="False"></Setter>
                         <Setter Property="MaxLength" Value="100"></Setter>
                         <Setter Property="ReturnType" Value="Next"></Setter>
-                        <Setter Property="IsSpellCheckEnabled" Value="False"></Setter>
                         <Setter Property="TextColor" Value="Tomato"></Setter>
                         <Setter Property="PlaceholderColor" Value="#bceeff"></Setter>
                         <Setter Property="Keyboard" Value="Text"></Setter>
-                        <Setter Property="FontFamily" Value="Rubik-VariableFont_wght"></Setter>
+                        <Setter Property="FontFamily" Value="Arial"></Setter>
                         <Setter Property="FontSize" Value="Body"></Setter>
+                        <Setter Property="CursorPosition" Value="50"></Setter>
+                        <Setter Property="WidthRequest" Value="600"></Setter>
                     </Style>
                     <Style TargetType="Frame">
-                        <Setter Property="HeightRequest" Value="30"></Setter>
-                        <Setter Property="WidthRequest" Value="30"></Setter>
-                        <Setter Property="CornerRadius" Value="20"></Setter>
-                        <Setter Property="HorizontalOptions" Value="Start"></Setter>
-                        <Setter Property="VerticalOptions" Value="Start"></Setter>
-                        <Setter Property="Margin" Value="9,0"></Setter>
-                        <Setter Property="Padding" Value="0"></Setter>
-                        <Setter Property="BackgroundColor" Value="White"></Setter>
+                        <Setter Property="Margin" Value="0,0,0,5"></Setter>
+                        <Setter Property="BackgroundColor" Value="AliceBlue"></Setter>
+                        <Setter Property="Padding" Value="7"></Setter>
+
+                        <Setter Property="CornerRadius" Value="7"></Setter>
+                        <Setter Property="HasShadow" Value="True"></Setter>
+                        <Setter Property="BorderColor" Value="White"></Setter>
+
+
+
                     </Style>
                     <Style TargetType="Label">
                         <Setter Property="VerticalOptions" Value="Center"></Setter>
@@ -308,7 +351,7 @@
             </StackLayout>
         </ScrollView>
         <!-- Botón Flotante -->
-        <Frame HasShadow="False" BorderColor="LightGray" Grid.Row="2" HeightRequest="65" WidthRequest="65" CornerRadius="50" Padding="10" BackgroundColor="LightGray" Margin="0,0,15,15" VerticalOptions="End" HorizontalOptions="End">
+        <Frame HasShadow="False" BorderColor="LightGray" Grid.Row="2" Grid.Column="1" HeightRequest="65" WidthRequest="65" CornerRadius="50" Padding="10" BackgroundColor="LightGray" Margin="0,0,15,15" VerticalOptions="End" HorizontalOptions="End">
             <ImageButton Clicked="ImageButton_Clicked" Source="https://cdn-icons-png.flaticon.com/512/1828/1828919.png">
                 <!--<ImageButton.Style>
                     <Style TargetType="ImageButton">
@@ -372,28 +415,11 @@
                     </Style>
                 </ImageButton.Style>-->
             </ImageButton>
-
-
-
-            <!--<ImageButton Source="https://cdn-icons-png.flaticon.com/512/1828/1828919.png" >
-                <ImageButton.Style>
-                    <Style TargetType="ImageButton">
-                        <Setter Property="Command" Value="{Binding CambiarVistaCommand}"></Setter>
-                        <Setter Property="CommandParameter" Value="Agregado"></Setter>
-                        <Style.Triggers>
-                            <DataTrigger Binding="{Binding EstadoVista}" Value="Agregado">
-                                <Setter Property="Command" Value="{Binding AgregarCommand}"></Setter>
-                                <Setter Property="CommandParameter" Value="{Binding Source={x:Reference sta}, Path=BindingContext}"></Setter>
-                            </DataTrigger>
-                        </Style.Triggers>
-                    </Style>
-                </ImageButton.Style>
-            </ImageButton>-->
             <Frame.Resources>
                 <Style TargetType="ImageButton">
                     <Setter Property="BorderColor" Value="LightGray"></Setter>
                     <Setter Property="CornerRadius" Value="40"></Setter>
-                    <Setter Property="BorderWidth" Value="4"></Setter>
+                    <Setter Property="BorderWidth" Value="0"></Setter>
                 </Style>
             </Frame.Resources>
             <!--COMIENZA-->

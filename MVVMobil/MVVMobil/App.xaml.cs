@@ -22,6 +22,7 @@ namespace MVVMobil
 
             MainPage = new NavigationPage(new ListaItemsView());
         }
+        // DetallesItemView
         // ListaItemsView
         // AgregarItemView
         protected override void OnStart()

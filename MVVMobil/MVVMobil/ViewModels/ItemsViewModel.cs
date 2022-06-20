@@ -21,13 +21,15 @@ namespace MVVMobil.ViewModels
         public ICommand AgregarCommand { get; set; }
         public ICommand ComprobarEnvioGratisCommand { get; set; }
         public ICommand ComprobarDevolucionesGratisCommand { get; set; }
+        //public ICommand TapCommand { get; set; }
         //public ushort Medida { get; set; }
         public string EstadoVista { get; set; } = "Lista";
         public Item ItemPrincipal { get; set; } //agregar, editar, eliminar
         public string Error { get; set; } = "";
-        public string[] combinacion = new string[5];
-        public bool[] EnvioYDevoluciones = new bool[4]; 
+        //public string[] combinacion = new string[5];
+        //public bool[] EnvioYDevoluciones = new bool[4]; 
         //public bool[] Envio_Y_Devolucion_Gratis = new bool[4];
+        //public string TapMessage { get; set; } = "";
         public ItemsViewModel()
         {
             Deserializar();
@@ -35,65 +37,79 @@ namespace MVVMobil.ViewModels
             AgregarCommand = new Command<bool[]>(Agregar);
             ComprobarEnvioGratisCommand = new Command<bool[]>(ComprobarEnvioGratis);
             ComprobarDevolucionesGratisCommand = new Command<bool[]>(ComprobarDevolucionesGratis);
-            //ComprobarMedidaItemCommand = new Command<string[]>(ComprobarMedidaItem);
+            //TapCommand = new Command<string>(Tap);
         }
+
+        //private void Tap(string obj)
+        //{
+        //    if (obj == "TapSelect")
+        //    {
+        //        TapMessage = "TapSelect";
+        //    }
+        //    Change();
+        //}
 
         private void ComprobarDevolucionesGratis(bool[] obj)
         {
-            if (obj[0])
+            if (!(obj[0] == false && obj[1] == false))
             {
-                ItemPrincipal.Devolucion_Gratis_SioNo = true;
+                if (obj[0])
+                {
+                    ItemPrincipal.Devolucion_Gratis_SioNo = true;
+                }
+                else
+                {
+                    ItemPrincipal.Devolucion_Gratis_SioNo = false;
+                }
             }
             else
             {
-                ItemPrincipal.Devolucion_Gratis_SioNo = false;
+                Error = "Selecciona si el ITEM incluye GASTOS DE DEVOLUCIÓN GRATUITOS";
             }
+            Change();
         }
 
         private void ComprobarEnvioGratis(bool[] obj)
         {
-            if (obj[0])
+            if (!(obj[0] == false && obj[1] == false))
             {
-                ItemPrincipal.Envio_Gratis_SioNo = true;
+                if (obj[0])
+                {
+                    ItemPrincipal.Envio_Gratis_SioNo = true;
+                }
+                else
+                {
+                    ItemPrincipal.Envio_Gratis_SioNo = false;
+                }
             }
             else
             {
-                ItemPrincipal.Envio_Gratis_SioNo = false;
+                Error = "Selecciona si el ITEM incluye ENVÍO GRATIS o no";
             }
+            Change();
         }
 
         //PAGES
         AgregarItemView vistaItem;
-        //public void ComprobarEnvio()
-        //{
-        //    if (EnvioYDevoluciones[0] == true)
-        //    {
-        //        ItemPrincipal.Envio_Gratis_SioNo = true;
-        //    }
-        //    else
-        //    {
-        //        ItemPrincipal.Envio_Gratis_SioNo = false;
-        //    }
 
-        //    if (EnvioYDevoluciones[2] == true)
-        //    {
-        //        ItemPrincipal.Devolucion_Gratis_SioNo = true;
-        //    }
-        //    else
-        //    {
-        //        ItemPrincipal.Devolucion_Gratis_SioNo = false;
-        //    }
-        //}
         private void Agregar(bool[] obj)
         {
             if (ItemPrincipal != null)
             {
-                Error = "";
+                if (Error == "Selecciona si el ITEM incluye ENVÍO GRATIS o no")
+                {
+                    Error = "Selecciona si el ITEM incluye ENVÍO GRATIS o no";
+                }
+                if (Error == "Selecciona si el ITEM incluye GASTOS DE DEVOLUCIÓN GRATUITOS")
+                {
+                    Error = "Selecciona si el ITEM incluye GASTOS DE DEVOLUCIÓN GRATUITOS";
+                }
+                
                 if (string.IsNullOrWhiteSpace(ItemPrincipal.Nombre_Item))
                 {
                     Error = "Escribe el NOMBRE del ITEM";
                 }
-                if (string.IsNullOrWhiteSpace(ItemPrincipal.Precio.ToString()))
+                if ( string.IsNullOrWhiteSpace(ItemPrincipal.Precio))
                 {
                     Error = "Escribe el PRECIO del ITEM";
                 }
@@ -101,38 +117,57 @@ namespace MVVMobil.ViewModels
                 {
                     Error = "Escribe el NOMBRE de la empresa en la que se encuentra el ITEM";
                 }
-                if (string.IsNullOrWhiteSpace(Error)) //Agregar
+                if (string.IsNullOrWhiteSpace(ItemPrincipal.Descripción))
                 {
-                    if (obj[0])
+                    Error = "Escribe una breve DESCRIPCIÓN del ITEM";
+                }
+                if (string.IsNullOrWhiteSpace(ItemPrincipal.Numero_De_Reviews))
+                {
+                    Error = "Escribe la cantidad de REVIEWS que tiene el ITEM";
+                }
+                
+                if (!(string.IsNullOrWhiteSpace(ItemPrincipal.Numero_De_Reviews) || !(Error == "")))
+                {
+                    string x = ItemPrincipal.Numero_De_Reviews;
+                    ItemPrincipal.Numero_De_Reviews = x + " " + "Reviews";
+                    string y = ItemPrincipal.Precio;
+                    ItemPrincipal.Precio = "$" + y;
+                    if (obj[0] == false && obj[1] == false && obj[2] == false && obj[3] == false && obj[4] == false)
                     {
-                        ItemPrincipal.Tamaño = 0;
-
+                        Error = "Selecciona una MEDIDA para el ITEM, puedes elegir 'UX' si no aplica ninguna medida";
                     }
-                    else if (obj[1])
+                    if (string.IsNullOrWhiteSpace(Error)) //Agregar
                     {
-                        ItemPrincipal.Tamaño = 1;
+                        if (obj[0])
+                        {
+                            ItemPrincipal.Tamaño = 0;
+                        }
+                        else if (obj[1])
+                        {
+                            ItemPrincipal.Tamaño = 1;
+                        }
+                        else if (obj[2])
+                        {
+                            ItemPrincipal.Tamaño = 2;
+                        }
+                        else if (obj[3])
+                        {
+                            ItemPrincipal.Tamaño = 3;
+                        }
+                        else if (obj[4])
+                        {
+                            ItemPrincipal.Tamaño = 4;
+                        }
+                        Lista.Add(ItemPrincipal);
+                        CambiarVista("Ver");
+                        Serializar();
+                        EstadoVista = "Lista";
                     }
-                    else if (obj[2])
-                    {
-                        ItemPrincipal.Tamaño = 2;
-                    }
-                    else if (obj[3])
-                    {
-                        ItemPrincipal.Tamaño = 3;
-                    }
-                    else if (obj[4])
-                    {
-                        ItemPrincipal.Tamaño = 4;
-                    }
-                    //ComprobarEnvio();
-                    
-                    Lista.Add(ItemPrincipal);
-                    CambiarVista("Ver");
-                    Serializar();
-                    EstadoVista = "Lista";
                 }
                 Change();
+                Error = "";
             }
+            
         }
 
         private void Change()
@@ -161,29 +196,7 @@ namespace MVVMobil.ViewModels
                 EstadoVista = "Agregado2";
             }
             else if (vista == "Agregado3")
-            {
-                EstadoVista = "Agregado3";
-            }
-            else if (vista == "Agregado4")
-            {
-                EstadoVista = "Agregado4";
-            }
-            else if (vista == "Agregado5")
-            {
-                EstadoVista = "Agregad5";
-            }
-            else if (vista == "Agregado6")
-            {
-                EstadoVista = "Agregado6";
-            }
-            else if (vista == "Agregado7")
-            {
-                EstadoVista = "Agregado7";
-            }
-            else if (vista == "Agregado8")
-            {
-                EstadoVista = "Agregado8";
-            }
+       
             Change();
         }
 

@@ -57,7 +57,7 @@
             <StackLayout>
                 <StackLayout>
                     <Grid>
-                        <Frame WidthRequest="200" CornerRadius="1" HasShadow="False" BorderColor="#6aa9e9" Padding="5">
+                        <Frame WidthRequest="200" CornerRadius="1" HasShadow="False" BorderColor="LightGray" Padding="5">
                             <Image Aspect="AspectFit" Source="https://saint-laurent.dam.kering.com/m/7124d3a45f3bed88/Large-534967GIV3F1000_A.jpg">
                             </Image>
                         </Frame>
@@ -70,11 +70,11 @@
                                 <Setter Property="VerticalOptions" Value="Center"></Setter>
                             </Style>
                         </StackLayout.Resources>
-                        <Image Source="https://cdn-icons.flaticon.com/png/512/3984/premium/3984392.png?token=exp=1655174334~hmac=9b14b2ebbbb16eefe065f8755b9084ee"></Image>
-                        <Image Source="https://cdn-icons.flaticon.com/png/512/3984/premium/3984392.png?token=exp=1655174334~hmac=9b14b2ebbbb16eefe065f8755b9084ee"></Image>
-                        <Image Source="https://cdn-icons.flaticon.com/png/512/3984/premium/3984392.png?token=exp=1655174334~hmac=9b14b2ebbbb16eefe065f8755b9084ee"></Image>
-                        <Image Source="https://cdn-icons.flaticon.com/png/512/3984/premium/3984392.png?token=exp=1655174334~hmac=9b14b2ebbbb16eefe065f8755b9084ee"></Image>
-                        <Image Source="https://cdn-icons-png.flaticon.com/512/872/872664.png" VerticalOptions="Center"></Image>
+                        <Image Source="https://cdn-icons-png.flaticon.com/512/149/149763.png"></Image>
+                        <Image Source="https://cdn-icons-png.flaticon.com/512/149/149763.png"></Image>
+                        <Image Source="https://cdn-icons-png.flaticon.com/512/149/149763.png"></Image>
+                        <Image Source="https://cdn-icons-png.flaticon.com/512/149/149763.png"></Image>
+                        <Image Source="https://cdn-icons-png.flaticon.com/512/149/149763.png"></Image>
                         <!--BINDING NÚMERO DE REVIEWS -->
                         <Label Text="23 Reviews" FontSize="Medium" VerticalOptions="Center"></Label>
                     </StackLayout>
@@ -130,17 +130,17 @@
                         </StackLayout>
                     </Frame>
                     <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
-                        <StackLayout Orientation="Horizontal" Margin="10,5">
+                        <StackLayout Orientation="Horizontal" Margin="5,5">
                             <StackLayout WidthRequest="20" HeightRequest="20" VerticalOptions="Center">
-                                <Image Source="https://cdn-icons.flaticon.com/png/512/2769/premium/2769339.png?token=exp=1655182962~hmac=9f40ed08ff50afe62e2fe4424aecbbda"></Image>
+                                <Image Source="https://cdn-icons.flaticon.com/png/512/2769/premium/2769339.png?token=exp=1655671414~hmac=3fc9c5ab875d37077e748068cc713084"></Image>
                             </StackLayout>
-                            <Label VerticalOptions="Center" Text="Free Shipping Available" FontFamily="Mada-ExtraLight" FontSize="Micro"></Label>
+                            <Label VerticalOptions="Center" Text="Free Shipping Available" FontFamily="Mada-ExtraLight" FontSize="Small"></Label>
                         </StackLayout>
-                        <StackLayout Orientation="Horizontal" Margin="10,5">
+                        <StackLayout Orientation="Horizontal" Margin="5,5">
                             <StackLayout WidthRequest="20" HeightRequest="20" VerticalOptions="Center">
                                 <Image Source="https://cdn-icons-png.flaticon.com/512/54/54303.png"></Image>
                             </StackLayout>
-                            <Label VerticalOptions="Center" Text="Free Returns + Exchanges" FontFamily="Mada-ExtraLight" FontSize="Micro"></Label>
+                            <Label VerticalOptions="Center" Text="Free Returns + Exchanges" FontFamily="Mada-ExtraLight" FontSize="Small"></Label>
                         </StackLayout>
                     </StackLayout>
 

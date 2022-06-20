@@ -15,9 +15,9 @@ namespace MVVMobil.Models
         //Ushort
         public ushort Tamaño { get; set; }
         //Int
-        public int Numero_De_Reviews { get; set; }
+        public string Numero_De_Reviews { get; set; }
         //Decimal
-        public decimal Precio { get; set; }
+        public string Precio { get; set; }
     }
 
 }
