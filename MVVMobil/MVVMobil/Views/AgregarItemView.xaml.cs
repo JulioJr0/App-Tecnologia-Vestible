@@ -26,18 +26,20 @@ namespace MVVMobil.Views
 
         private void Agregar_Clicked(object sender, EventArgs e)
         {
-
+            //bool[] UNO = new bool[2];
+            //bool[] DOS = new bool[2];
+            //bool[] TRES = new bool[4];
         }
 
         private void ImageButton_Clicked(object sender, EventArgs e)
         {
-            bool[] UNO = new bool[2];
-            bool[] DOS = new bool[2];
-            bool[] TRES = new bool[4];
+            _ = new bool[2];
+            _ = new bool[2];
+            _ = new bool[4];
 
-            UNO = (bool[])(sta2.BindingContext);
-            DOS = (bool[])(sta3.BindingContext);
-            TRES = (bool[])(sta.BindingContext);
+            bool[] UNO = (bool[])sta2.BindingContext;
+            bool[] DOS = (bool[])sta3.BindingContext;
+            bool[] TRES = (bool[])sta.BindingContext;
 
             var x = (ItemsViewModel)BindingContext;
             x.CambiarVistaCommand.Execute("Agregado1");

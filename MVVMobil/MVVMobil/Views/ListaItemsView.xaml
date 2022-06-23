@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:model="clr-namespace:MVVMobil.Models" xmlns:viewmodels="clr-namespace:MVVMobil.ViewModels"
+             xmlns:viewmodels="clr-namespace:MVVMobil.ViewModels"
              NavigationPage.HasNavigationBar="False"
              xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+             xmlns:magic="http://magic.com/schemas/gradients"
              x:Class="MVVMobil.Views.ListaItemsView" BackgroundColor="LightGray">
     <!-- Un coleccionView Puede ser seleccionable o no
          En un listView forzozamente tiene que ser seleccionable  
@@ -23,17 +23,17 @@
     
     <!-- CONTENT PAGE RESOURCES -->
     <ContentPage.Resources>
-        <!-- DataTemplate -->
-        <DataTemplate x:Key="Plantilla" x:DataType="{x:Type model:Item}">
-            <StackLayout BackgroundColor="Green">
+        <!-- DataTemplate x:DataType="{x:Type model:Item}" -->
+        <DataTemplate x:Key="Plantilla">
+            <StackLayout>
                 <SwipeView>
                     <SwipeView.RightItems>
-                        <SwipeItem x:Name="SwipeItem_Edit" IconImageSource="https://cdn-icons-png.flaticon.com/512/54/54852.png" BackgroundColor="#5F799E" Text="Edit"></SwipeItem>
-                        <SwipeItem x:Name="SwipeItem_Delete" Clicked="SwipeItem_Delete_Clicked" IconImageSource="https://cdn-icons-png.flaticon.com/512/54/54324.png" BackgroundColor="#EBC1BC" Text="Delete"></SwipeItem>
+                        <SwipeItem Command="{Binding Source={x:Reference avm},Path=EditCommand}" CommandParameter="{Binding .}" x:Name="SwipeItem_Edit" IconImageSource="https://cdn-icons-png.flaticon.com/512/54/54852.png" BackgroundColor="#5F799E" Text="Edit"></SwipeItem>
+                        <SwipeItem Clicked="SwipeItem_Delete_Clicked_1" CommandParameter="{Binding .}" x:Name="SwipeItem_Delete" IconImageSource="https://cdn-icons-png.flaticon.com/512/54/54324.png" BackgroundColor="#EBC1BC" Text="Delete"></SwipeItem>
                     </SwipeView.RightItems>
                     <!--BackgroundColor de la información derecha-->
-                    <Frame Margin="4,5"  BorderColor="Green" CornerRadius="6" HasShadow="True" Padding="0" >
-                        <Grid BackgroundColor="White" x:Name="Grid1">
+                    <Frame Margin="4,5" BackgroundColor="#dcdcdc" Opacity="0.9" BorderColor="White" CornerRadius="6" HasShadow="True" Padding="1" >
+                        <Grid x:Name="Grid1">
                             <Grid.GestureRecognizers>
                                 <TapGestureRecognizer></TapGestureRecognizer>
                             </Grid.GestureRecognizers>
@@ -51,9 +51,22 @@
                                 <ColumnDefinition Width="*"></ColumnDefinition>
                                 <ColumnDefinition Width="*"></ColumnDefinition>
                             </Grid.ColumnDefinitions>
+                            <magic:GradientView VerticalOptions="FillAndExpand">
+                                <magic:CssGradientSource>
+                                    <![CDATA[
+                                        linear-gradient(-20deg, #6e45e2 0%, #88d3ce 100%)
+                                    ]]>
+                                </magic:CssGradientSource>
+                            </magic:GradientView>
                             <!--IMAGEN COMPLETA IZQUIERDA-->
                             <Frame HasShadow="False"  Padding="0" WidthRequest="100" HeightRequest="100" Grid.Row="0" Grid.RowSpan="8">
-                                <Image Aspect="AspectFill" Source="https://saint-laurent.dam.kering.com/m/7124d3a45f3bed88/Large-534967GIV3F1000_A.jpg">
+                                <Image Aspect="AspectFit" Source="{Binding URL_Completa }"
+                                       xct:TouchEffect.HoveredAnimationDuration="200" 
+                                       xct:TouchEffect.HoveredAnimationEasing="{x:Static Easing.CubicInOut}"
+                                       xct:TouchEffect.AnimationDuration="300"
+                                       xct:TouchEffect.PressedScale="1.80"
+                                       xct:TouchEffect.PressedOpacity="1"
+                                       xct:TouchEffect.NormalBackgroundColor="Transparent">
                                 </Image>
                             </Frame>
                             <!--BINDING TITULO -->
@@ -71,10 +84,16 @@
                                 <Image Source="https://cdn-icons-png.flaticon.com/512/149/149763.png"></Image>
                                 <Image Source="https://cdn-icons-png.flaticon.com/512/149/149763.png" VerticalOptions="Center"></Image>
                                 <!--BINDING NÚMERO DE REVIEWS -->
-                                <Label FontSize="Default" VerticalOptions="Center" Text="{Binding Numero_De_Reviews}"></Label>
+                                <StackLayout Grid.Column="1" Grid.Row="2" Orientation="Horizontal" >
+                                    <Label FontSize="Default" VerticalOptions="Start" Text="{Binding Numero_De_Reviews}"></Label>
+                                    <Label Text="Review" FontSize="Default" VerticalOptions="End"></Label>
+                                </StackLayout>
                             </StackLayout>
                             <!--BINDING PRECIO -->
-                            <Label Grid.Column="1" Grid.Row="2" Text="{Binding Precio}" FontFamily="SawarabiGothic-Regular" FontSize="Large"></Label>
+                            <StackLayout Grid.Column="1" Grid.Row="2" Orientation="Horizontal">
+                                <Label Text="$" FontFamily="SawarabiGothic-Regular" FontSize="Large"></Label>
+                                <Label Text="{Binding Precio}" FontFamily="SawarabiGothic-Regular" FontSize="Large"></Label>
+                            </StackLayout>
                             <StackLayout Orientation="Horizontal" Grid.Column="1" Grid.Row="3">
                                 <StackLayout.Resources>
                                     <Style TargetType="Frame">
@@ -97,7 +116,12 @@
                                     </Style>
                                 </StackLayout.Resources>
                                 <!--BINDING Talla o Tamaño -->
-                                <Frame>
+                                <Frame
+                                    xct:TouchEffect.HoveredAnimationDuration="200" 
+                                       xct:TouchEffect.HoveredAnimationEasing="{x:Static Easing.CubicInOut}"
+                                       xct:TouchEffect.AnimationDuration="0"
+                                       xct:TouchEffect.PressedScale="1.60"
+                                       xct:TouchEffect.PressedOpacity="0.3">
                                     <Frame.Triggers>
                                         <DataTrigger TargetType="Frame" Binding="{Binding Tamaño}" Value="0">
                                             <Setter Property="BackgroundColor" Value="black"></Setter>
@@ -111,7 +135,12 @@
                                         </Label.Triggers>
                                     </Label>
                                 </Frame>
-                                <Frame>
+                                <Frame
+                                    xct:TouchEffect.HoveredAnimationDuration="200" 
+                                       xct:TouchEffect.HoveredAnimationEasing="{x:Static Easing.CubicInOut}"
+                                       xct:TouchEffect.AnimationDuration="0"
+                                       xct:TouchEffect.PressedScale="1.60"
+                                       xct:TouchEffect.PressedOpacity="0.3">
                                     <Frame.Triggers>
                                         <DataTrigger TargetType="Frame" Binding="{Binding Tamaño}" Value="1">
                                             <Setter Property="BackgroundColor" Value="black"></Setter>
@@ -125,7 +154,12 @@
                                         </Label.Triggers>
                                     </Label>
                                 </Frame>
-                                <Frame >
+                                <Frame
+                                    xct:TouchEffect.HoveredAnimationDuration="200" 
+                                       xct:TouchEffect.HoveredAnimationEasing="{x:Static Easing.CubicInOut}"
+                                       xct:TouchEffect.AnimationDuration="0"
+                                       xct:TouchEffect.PressedScale="1.60"
+                                       xct:TouchEffect.PressedOpacity="0.3">
                                     <Frame.Triggers>
                                         <DataTrigger TargetType="Frame" Binding="{Binding Tamaño}" Value="2">
                                             <Setter Property="BackgroundColor" Value="black"></Setter>
@@ -139,7 +173,12 @@
                                         </Label.Triggers>
                                     </Label>
                                 </Frame>
-                                <Frame>
+                                <Frame
+                                    xct:TouchEffect.HoveredAnimationDuration="200" 
+                                       xct:TouchEffect.HoveredAnimationEasing="{x:Static Easing.CubicInOut}"
+                                       xct:TouchEffect.AnimationDuration="0"
+                                       xct:TouchEffect.PressedScale="1.60"
+                                       xct:TouchEffect.PressedOpacity="0.3">
                                     <Frame.Triggers>
                                         <DataTrigger TargetType="Frame" Binding="{Binding Tamaño}" Value="3">
                                             <Setter Property="BackgroundColor" Value="black"></Setter>
@@ -153,7 +192,12 @@
                                         </Label.Triggers>
                                     </Label>
                                 </Frame>
-                                <Frame>
+                                <Frame
+                                    xct:TouchEffect.HoveredAnimationDuration="200" 
+                                       xct:TouchEffect.HoveredAnimationEasing="{x:Static Easing.CubicInOut}"
+                                       xct:TouchEffect.AnimationDuration="0"
+                                       xct:TouchEffect.PressedScale="1.60"
+                                       xct:TouchEffect.PressedOpacity="0.3">
                                     <Frame.Triggers>
                                         <DataTrigger TargetType="Frame" Binding="{Binding Tamaño}" Value="4">
                                             <Setter Property="BackgroundColor" Value="black"></Setter>
@@ -170,7 +214,15 @@
                             </StackLayout>
                             <!--BINDING DESCRIPCIÓN -->
                             <Label MaxLines="3" LineBreakMode="TailTruncation" Grid.Column="1" Grid.Row="4" Text="{Binding Descripción}" HorizontalOptions="Start" ></Label>
-                            <Frame Grid.Column="1" Grid.Row="5" HeightRequest="25" WidthRequest="160"  CornerRadius="20" HorizontalOptions="Start" Margin="0" Padding="0" >
+                            <Frame Grid.Column="1" Grid.Row="5" HeightRequest="25" WidthRequest="160"  CornerRadius="20" HorizontalOptions="Start" Margin="0" Padding="0"
+                                   xct:TouchEffect.HoveredAnimationDuration="200" 
+                                       xct:TouchEffect.HoveredAnimationEasing="{x:Static Easing.CubicInOut}"
+                                       xct:TouchEffect.AnimationDuration="0"
+                                       xct:TouchEffect.PressedScale="1"
+                                       xct:TouchEffect.PressedOpacity="0.8">
+                                <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding Source={x:Reference avm}, Path=TapShowDetailsCommand}" CommandParameter="{Binding .}"></TapGestureRecognizer>
+                                </Frame.GestureRecognizers>
                                 <StackLayout Orientation="Horizontal" HorizontalOptions="Center" VerticalOptions="Center">
                                     <!--BINDING Nombre Empresa Vende -->
                                     <Label Text="Buy it now" FontFamily="SawarabiGothic-Regular" FontSize="Subtitle" TextColor="Black" Margin="0"/>
@@ -229,7 +281,6 @@
                             </Grid.Resources>
                         </Grid>
                     </Frame>
-                    
                 </SwipeView>
             </StackLayout>
         </DataTemplate>
@@ -247,81 +298,123 @@
         </Grid.RowDefinitions>
         <!-- StackLayout ToolBar Personalizada Logo -->
         <StackLayout Grid.Row="0">
-            <StackLayout Orientation="Horizontal" BackgroundColor="#131c46" HeightRequest="50" >
-                <StackLayout.Resources>
-                    <Style TargetType="Image">
-                        <Setter Property="VerticalOptions" Value="Center"></Setter>
-                        <Setter Property="HorizontalOptions" Value="CenterAndExpand"></Setter>
-                    </Style>
-                </StackLayout.Resources>
-                <Image Source="https://www.iconsdb.com/icons/preview/white/email-5-xxl.png" Margin="0,10" >
-                    
-                </Image>
-                <Image Source="https://www.iconsdb.com/icons/preview/white/favorite-3-xxl.png" Margin="0,11"></Image>
-                <Image Source="https://1000marcas.net/wp-content/uploads/2019/12/meta-logo.png" Margin="0"></Image>
-                <Image Source="https://www.iconsdb.com/icons/preview/white/active-search-xxl.png" Margin="0,11"></Image>
-                <Image Source="https://www.iconsdb.com/icons/preview/white/cart-xxl.png" Margin="0,10"></Image>
-
-                <!--<Image Source="https://cdn-icons-png.flaticon.com/512/54/54290.png" Margin="0,12"></Image>
-                <Image Source=" https://cdn-icons-png.flaticon.com/512/54/54966.png"></Image>
-                <Image Source="https://1000marcas.net/wp-content/uploads/2019/12/meta-logo.png" HorizontalOptions="Center" Margin="0"></Image>
-                <Image Source="https://cdn-icons-png.flaticon.com/512/54/54481.png"></Image>
-                <Image Source="https://cdn-icons-png.flaticon.com/512/2089/2089433.png" Margin="0,12"></Image>-->
-            </StackLayout>
+            <magic:GradientView VerticalOptions="FillAndExpand">
+                <magic:CssGradientSource>
+                    <![CDATA[
+                        linear-gradient(180deg, rgba(19,28,70,1) 27%, rgba(20,28,66,1) 49%, rgba(19,30,79,1) 67%)
+                    ]]>
+                </magic:CssGradientSource>
+            </magic:GradientView>
+        </StackLayout>
+        <!--BackgroundColor="#131c46"-->
+        <StackLayout Orientation="Horizontal" HeightRequest="50">
+            <StackLayout.Resources>
+                <Style TargetType="Image">
+                    <Setter Property="VerticalOptions" Value="Center"></Setter>
+                    <Setter Property="HorizontalOptions" Value="CenterAndExpand"></Setter>
+                </Style>
+            </StackLayout.Resources>
+            <Image Source="https://www.iconsdb.com/icons/preview/white/email-5-xxl.png" Margin="0,10" 
+                       xct:TouchEffect.HoveredAnimationDuration="10" 
+                       xct:TouchEffect.HoveredAnimationEasing="{x:Static Easing.CubicInOut}"
+                       xct:TouchEffect.PressedScale="1.25"
+                       xct:TouchEffect.PressedOpacity="0.9"
+                       xct:TouchEffect.NormalBackgroundColor="Transparent"></Image>
+            <Image Source="https://www.iconsdb.com/icons/preview/white/favorite-3-xxl.png" Margin="0,11"
+                       xct:TouchEffect.HoveredAnimationDuration="10" 
+                       xct:TouchEffect.HoveredAnimationEasing="{x:Static Easing.CubicInOut}"
+                       xct:TouchEffect.PressedScale="1.25"
+                       xct:TouchEffect.PressedOpacity="0.9"
+                       xct:TouchEffect.NormalBackgroundColor="Transparent"></Image>
+            <Image Source="https://1000marcas.net/wp-content/uploads/2019/12/meta-logo.png" Margin="0"
+                       xct:TouchEffect.HoveredAnimationDuration="10" 
+                       xct:TouchEffect.HoveredAnimationEasing="{x:Static Easing.CubicInOut}"
+                       xct:TouchEffect.PressedScale="1.25"
+                       xct:TouchEffect.PressedOpacity="0.9"
+                       xct:TouchEffect.NormalBackgroundColor="Transparent"></Image>
+            <Image Source="https://www.iconsdb.com/icons/preview/white/active-search-xxl.png" Margin="0,11"
+                       xct:TouchEffect.HoveredAnimationDuration="10" 
+                       xct:TouchEffect.HoveredAnimationEasing="{x:Static Easing.CubicInOut}"
+                       xct:TouchEffect.PressedScale="1.25"
+                       xct:TouchEffect.PressedOpacity="0.9"
+                       xct:TouchEffect.NormalBackgroundColor="Transparent"></Image>
+            <Image Source="https://www.iconsdb.com/icons/preview/white/cart-xxl.png" Margin="0,10"
+                       xct:TouchEffect.HoveredAnimationDuration="10" 
+                       xct:TouchEffect.HoveredAnimationEasing="{x:Static Easing.CubicInOut}"
+                       xct:TouchEffect.PressedScale="1.25"
+                       xct:TouchEffect.PressedOpacity="0.9"
+                       xct:TouchEffect.NormalBackgroundColor="Transparent"></Image>
         </StackLayout>
         <!-- ScrollView de las subcategorias -->
-        <!--<Label.GestureRecognizers>
-            <TapGestureRecognizer
-                        Command="{Binding TapCommand}"
-                        CommandParameter="Image1" />
-        </Label.GestureRecognizers>-->
-        <ScrollView Grid.Row="1" BackgroundColor="#3591d8" Orientation="Horizontal" HorizontalScrollBarVisibility="Never" Margin="0,0,8,0" Padding="0">
-            <StackLayout x:Name="StackLayout_SubCategorias" Orientation="Horizontal" Margin="0" Padding="0,9,0,0">
-                <StackLayout  Margin="0">
-                    
-                    <!--<StackLayout.Style>
-                        <Style TargetType="StackLayout">
-                            <Style.Triggers>
-                                <DataTrigger TargetType="StackLayout" Binding="{Binding TapMessage}" Value="TapSelect">
-                                    <Setter Property="BackgroundColor" Value="LightGray"></Setter>
-                                </DataTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </StackLayout.Style>-->
-                    
-                    <Label x:Name="lll" Text="SmartWaches" TextColor="Black">
+        <ScrollView Grid.Row="1" Orientation="Horizontal" HorizontalScrollBarVisibility="Never" Margin="0,0,8,0" Padding="0" VerticalOptions="FillAndExpand">
+            <StackLayout x:Name="StackLayout_SubCategorias" Orientation="Horizontal" Margin="0" Padding="0,4,0,0">
+                <StackLayout
+                       xct:TouchEffect.HoveredAnimationDuration="10" 
+                       xct:TouchEffect.HoveredAnimationEasing="{x:Static Easing.CubicInOut}"
+                       xct:TouchEffect.PressedOpacity="0.3"
+                       xct:TouchEffect.NormalBackgroundColor="Transparent">
+                    <Label Text="SmartWaches" TextColor="Black">
                     </Label >
                 </StackLayout>
-                <StackLayout>
+                <StackLayout
+                    xct:TouchEffect.HoveredAnimationDuration="10" 
+                       xct:TouchEffect.HoveredAnimationEasing="{x:Static Easing.CubicInOut}"
+                       xct:TouchEffect.PressedOpacity="0.3"
+                       xct:TouchEffect.NormalBackgroundColor="Transparent">
                     <Label Text="Glasses" TextColor="Black">
                     </Label>
                 </StackLayout>
-                <StackLayout>
+                <StackLayout
+                    xct:TouchEffect.HoveredAnimationDuration="10" 
+                       xct:TouchEffect.HoveredAnimationEasing="{x:Static Easing.CubicInOut}"
+                       xct:TouchEffect.PressedOpacity="0.3"
+                       xct:TouchEffect.NormalBackgroundColor="Transparent">
                     <Label Text="Smart Clothing" TextColor="Black">
                     </Label>
                 </StackLayout>
-                <StackLayout>
+                <StackLayout
+                    xct:TouchEffect.HoveredAnimationDuration="10" 
+                       xct:TouchEffect.HoveredAnimationEasing="{x:Static Easing.CubicInOut}"
+                       xct:TouchEffect.PressedOpacity="0.3"
+                       xct:TouchEffect.NormalBackgroundColor="Transparent">
                     <Label Text="IA" TextColor="Black">
                     </Label>
                 </StackLayout>
-                <StackLayout>
+                <StackLayout
+                    xct:TouchEffect.HoveredAnimationDuration="10" 
+                       xct:TouchEffect.HoveredAnimationEasing="{x:Static Easing.CubicInOut}"
+                       xct:TouchEffect.PressedOpacity="0.3"
+                       xct:TouchEffect.NormalBackgroundColor="Transparent">
                 </StackLayout>
-                <StackLayout>
+                <StackLayout
+                    xct:TouchEffect.HoveredAnimationDuration="10" 
+                       xct:TouchEffect.HoveredAnimationEasing="{x:Static Easing.CubicInOut}"
+                       xct:TouchEffect.PressedOpacity="0.3"
+                       xct:TouchEffect.NormalBackgroundColor="Transparent">
                     <Label Text="Backpacks And Bags" TextColor="Black">
                     </Label>
                 </StackLayout>
-                <StackLayout>
+                <StackLayout
+                    xct:TouchEffect.HoveredAnimationDuration="10" 
+                       xct:TouchEffect.HoveredAnimationEasing="{x:Static Easing.CubicInOut}"
+                       xct:TouchEffect.PressedOpacity="0.3"
+                       xct:TouchEffect.NormalBackgroundColor="Transparent">
                     <Label Text="Smart Rings" TextColor="Black">
-                        
+
                     </Label>
                 </StackLayout>
-                <StackLayout>
+                <StackLayout
+                    xct:TouchEffect.HoveredAnimationDuration="10" 
+                       xct:TouchEffect.HoveredAnimationEasing="{x:Static Easing.CubicInOut}"
+                       xct:TouchEffect.PressedOpacity="0.3"
+                       xct:TouchEffect.NormalBackgroundColor="Transparent">
                     <Label Text="Wearable" TextColor="Black">
                     </Label>
                 </StackLayout>
                 <StackLayout.Resources>
                     <Style TargetType="StackLayout">
                         <Setter Property="VerticalOptions" Value="CenterAndExpand"></Setter>
+                        <Setter Property="HorizontalOptions" Value="CenterAndExpand"></Setter>
                     </Style>
                     <Style TargetType="Label">
                         <Setter Property="VerticalOptions" Value="Center"></Setter>
@@ -333,15 +426,29 @@
                 </StackLayout.Resources>
             </StackLayout>
         </ScrollView>
+        
         <!-- ScrollView De los Items BINDING-->
         <ScrollView Grid.Row="2" BackgroundColor="#6aa9e9">
             <CollectionView ItemsSource="{Binding Lista}" ItemTemplate="{StaticResource Plantilla}">
-                
+
             </CollectionView>
         </ScrollView>
+        <StackLayout Grid.Row="2"  Margin="10">
+            <StackLayout.Triggers>
+                <DataTrigger TargetType="StackLayout" Binding="{Binding Visible}" Value="Verdadero">
+                    <Setter Property="IsVisible" Value="true" />
+                </DataTrigger>
+                <DataTrigger TargetType="StackLayout" Binding="{Binding Visible}" Value="Falso">
+                    <Setter Property="IsVisible" Value="false" />
+                </DataTrigger>
+            </StackLayout.Triggers>
+            <Label FontAttributes="Bold" HorizontalOptions="Center" Text="Ingresa al menos un ITEM para visualizar el mennú" TextColor="Black" FontSize="Header" Margin="0,70,0,0"></Label>
+            <Image VerticalOptions="CenterAndExpand" Source="https://i.pinimg.com/222x/7a/45/db/7a45db5c46d2ff9237c7700c09fddf17.jpg" Aspect="AspectFit" WidthRequest="300" HeightRequest="300"></Image>
+        </StackLayout>
         <!-- Botón Flotante -->
-        <Frame HasShadow="False" BorderColor="LightGray" Grid.Row="2" HeightRequest="65" WidthRequest="65" CornerRadius="55" Padding="10" BackgroundColor="LightGray" Margin="0,0,15,15" VerticalOptions="End" HorizontalOptions="End">
-            <ImageButton Command="{Binding CambiarVistaCommand}" CommandParameter="Agregar" Source="https://cdn-icons-png.flaticon.com/512/1828/1828919.png"></ImageButton>
+        <Frame Grid.Row="2" HasShadow="False" BorderColor="LightGray" HeightRequest="65" WidthRequest="65" CornerRadius="55" Padding="10" BackgroundColor="LightGray" Margin="0,0,15,15" VerticalOptions="End" HorizontalOptions="End">
+            <ImageButton Command="{Binding CambiarVistaCommand}" CommandParameter="Agregar" Source="https://cdn-icons-png.flaticon.com/512/1828/1828919.png" BackgroundColor="Transparent">
+            </ImageButton>
             <Frame.Resources>
                 <Style TargetType="ImageButton">
                     <Setter Property="BorderColor" Value="LightGray"></Setter>
@@ -350,7 +457,5 @@
                 </Style>
             </Frame.Resources>
         </Frame>
-        
     </Grid>
-    
 </ContentPage>

@@ -4,8 +4,12 @@ public class MonoPackageManager_Resources {
 		/* We need to ensure that "MVVMobil.Android.dll" comes first in this list. */
 		"MVVMobil.Android.dll",
 		"FormsViewGroup.dll",
+		"MagicGradients.dll",
 		"MVVMobil.dll",
 		"Newtonsoft.Json.dll",
+		"SkiaSharp.dll",
+		"SkiaSharp.Views.Android.dll",
+		"SkiaSharp.Views.Forms.dll",
 		"Xamarin.AndroidX.Activity.dll",
 		"Xamarin.AndroidX.Annotation.dll",
 		"Xamarin.AndroidX.Annotation.Experimental.dll",

@@ -1,4 +1,5 @@
-﻿using MVVMobil.ViewModels;
+﻿using MVVMobil.Models;
+using MVVMobil.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,20 +32,20 @@ namespace MVVMobil.Views
             //var x = (ItemsViewModel)BindingContext;
 
         }
-        private void OnStackLayoutTap(object obj)
-        {
-            //(obj as StackLayout).BackgroundColor = Color.Black;
-            //Task.Run(async () =>
-            //{
-            //    await (obj as StackLayout).RotateTo((obj as StackLayout).Rotation + 360, 1500);
-            //     //(obj as StackLayout).BackgroundColor = Color.Black;
-            //});
-            //Task.Run(async () =>
-            //{
-            //    await (obj as StackLayout).ScaleTo(0.5, 750);
-            //    await (obj as StackLayout).ScaleTo(1, 750);
-            //});
-        }
+        //private void OnStackLayoutTap(object obj)
+        //{
+        //    //(obj as StackLayout).BackgroundColor = Color.Black;
+        //    //Task.Run(async () =>
+        //    //{
+        //    //    await (obj as StackLayout).RotateTo((obj as StackLayout).Rotation + 360, 1500);
+        //    //     //(obj as StackLayout).BackgroundColor = Color.Black;
+        //    //});
+        //    //Task.Run(async () =>
+        //    //{
+        //    //    await (obj as StackLayout).ScaleTo(0.5, 750);
+        //    //    await (obj as StackLayout).ScaleTo(1, 750);
+        //    //});
+        //}
 
         private void ToolbarItem_Clicked(object sender, EventArgs e)
         {
@@ -63,6 +64,17 @@ namespace MVVMobil.Views
             //{
             //    avm.EliminarCommand.Execute(sw.CommandParameter);
             //}
+        }
+
+        private async void SwipeItem_Delete_Clicked_1(object sender, EventArgs e)
+        {
+            var sw = (SwipeItem)sender; // unboxing
+
+            if ( await DisplayAlert("Por favor confirme", $"¿Estás seguro de eliminar el siguiente producto: {((Item)sw.CommandParameter).Nombre_Item}?", "Sí, quiero eliminarlo", "No") == true)
+            {
+                
+                avm.EliminarCommand.Execute(sw.CommandParameter);
+            }
         }
     }
 }

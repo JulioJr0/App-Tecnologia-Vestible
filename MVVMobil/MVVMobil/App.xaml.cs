@@ -25,6 +25,7 @@ namespace MVVMobil
         // DetallesItemView
         // ListaItemsView
         // AgregarItemView
+        //EditarItemView
         protected override void OnStart()
         {
         }

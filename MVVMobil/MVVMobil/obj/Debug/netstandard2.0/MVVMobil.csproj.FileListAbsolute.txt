@@ -18,7 +18,6 @@ D:\JULIOREYES\MVVMobil\MVVMobil\MVVMobil\bin\Debug\netstandard2.0\MVVMobil.deps.
 D:\JULIOREYES\MVVMobil\MVVMobil\MVVMobil\bin\Debug\netstandard2.0\MVVMobil.dll
 D:\JULIOREYES\MVVMobil\MVVMobil\MVVMobil\bin\Debug\netstandard2.0\ref\MVVMobil.dll
 D:\JULIOREYES\MVVMobil\MVVMobil\MVVMobil\bin\Debug\netstandard2.0\MVVMobil.pdb
-D:\JULIOREYES\MVVMobil\MVVMobil\MVVMobil\obj\Debug\netstandard2.0\MVVMobil.csproj.AssemblyReference.cache
 D:\JULIOREYES\MVVMobil\MVVMobil\MVVMobil\obj\Debug\netstandard2.0\MVVMobil.GeneratedMSBuildEditorConfig.editorconfig
 D:\JULIOREYES\MVVMobil\MVVMobil\MVVMobil\obj\Debug\netstandard2.0\App.xaml.g.cs
 D:\JULIOREYES\MVVMobil\MVVMobil\MVVMobil\obj\Debug\netstandard2.0\MainPage.xaml.g.cs
@@ -33,3 +32,4 @@ D:\JULIOREYES\MVVMobil\MVVMobil\MVVMobil\obj\Debug\netstandard2.0\MVVMobil.pdb
 D:\JULIOREYES\MVVMobil\MVVMobil\MVVMobil\obj\Debug\netstandard2.0\Views\AgregarItemView.xaml.g.cs
 D:\JULIOREYES\MVVMobil\MVVMobil\MVVMobil\obj\Debug\netstandard2.0\Views\EditarItemView.xaml.g.cs
 D:\JULIOREYES\MVVMobil\MVVMobil\MVVMobil\obj\Debug\netstandard2.0\Views\DetallesItemView.xaml.g.cs
+D:\JULIOREYES\MVVMobil\MVVMobil\MVVMobil\obj\Debug\netstandard2.0\MVVMobil.csproj.AssemblyReference.cache

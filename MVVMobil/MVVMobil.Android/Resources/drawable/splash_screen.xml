@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+  <item>
+    <color android:color="@color/splash_background"/>
+  </item>
+  <item>
+    <bitmap android:src="@drawable/logo_dev"
+            android:tileMode="disabled"
+            android:gravity="center"/>
+  </item>
+</layer-list>
+
+<!--<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SplashActivity">
+
+  <RelativeLayout
+      android:id="@+id/logo_dev"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_centerInParent="true">
+
+    <ImageView
+         android:id="@+id/logo_dev"
+         android:layout_width="match_parent"
+         android:layout_height="match_parent"
+         app:srcCompat="@drawable/logo_dev"
+        />
+  </RelativeLayout> 
+</androidx.constraintlayout.widget.ConstraintLayout>-->

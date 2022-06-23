@@ -9,23 +9,44 @@ using System.IO;
 using System.Text;
 using System.Windows.Input;
 using Xamarin.Forms;
-
+using System.Linq;
 namespace MVVMobil.ViewModels
 {
     public class ItemsViewModel : INotifyPropertyChanged/*, IMultiValueConverter*/
     {
+        public IEnumerable<Item> ListaOrdenada => Lista.OrderBy(x => x.Nombre_Item);
         //Agregar
         public ObservableCollection<Item> Lista { get; set; } = new ObservableCollection<Item>();
 
         public ICommand CambiarVistaCommand { get; set; }
         public ICommand AgregarCommand { get; set; }
+        public ICommand EliminarCommand { get; set; }
         public ICommand ComprobarEnvioGratisCommand { get; set; }
         public ICommand ComprobarDevolucionesGratisCommand { get; set; }
+        public ICommand TapShowDetailsCommand { get; set; }
+        public ICommand EditCommand { get; set; }
+        public ICommand ToSaveCommand { get; set; }
         //public ICommand TapCommand { get; set; }
         //public ushort Medida { get; set; }
         public string EstadoVista { get; set; } = "Lista";
         public Item ItemPrincipal { get; set; } //agregar, editar, eliminar
         public string Error { get; set; } = "";
+        public string FaltanteURL { get; set; } = "";
+        public string Visible
+        {
+            get
+            {
+                if (!(Lista.Count != 0))
+                {
+                    return "Verdadero";
+                }
+                else
+                {
+                    return "Falso";
+                }
+            }
+            set => Visible = value;
+        }
         //public string[] combinacion = new string[5];
         //public bool[] EnvioYDevoluciones = new bool[4]; 
         //public bool[] Envio_Y_Devolucion_Gratis = new bool[4];
@@ -35,9 +56,145 @@ namespace MVVMobil.ViewModels
             Deserializar();
             CambiarVistaCommand = new Command<string>(CambiarVista);
             AgregarCommand = new Command<bool[]>(Agregar);
+            EliminarCommand = new Command<Item>(Eliminar);
             ComprobarEnvioGratisCommand = new Command<bool[]>(ComprobarEnvioGratis);
             ComprobarDevolucionesGratisCommand = new Command<bool[]>(ComprobarDevolucionesGratis);
+            TapShowDetailsCommand = new Command<Item>(TapShowDetails);
+            EditCommand = new Command<Item>(Edit);
+            ToSaveCommand = new Command<int>(ToSave);
+            
             //TapCommand = new Command<string>(Tap);
+        }
+        int indice;
+        public void BeforeToSave(bool[] obj)
+        {
+            if (ItemPrincipal != null)
+            {
+                string xx = ItemPrincipal.FaltanteURL1 + ItemPrincipal.FaltanteURL2;
+                if (Uri.IsWellFormedUriString(xx, UriKind.Absolute))
+                {
+                    ItemPrincipal.URL_Completa = xx;
+                }
+                else
+                {
+                    Error = "Ingresa una URL válida para la imagen del ITEM";
+                }
+                if (Error == "Selecciona si el ITEM incluye ENVÍO GRATIS o no")
+                {
+                    Error = "Selecciona si el ITEM incluye ENVÍO GRATIS o no";
+                }
+                else if (Error == "Selecciona si el ITEM incluye GASTOS DE DEVOLUCIÓN GRATUITOS")
+                {
+                    Error = "Selecciona si el ITEM incluye GASTOS DE DEVOLUCIÓN GRATUITOS";
+                }
+                else if (string.IsNullOrWhiteSpace(ItemPrincipal.Nombre_Item))
+                {
+                    Error = "Escribe el NOMBRE del ITEM";
+                }
+                else if (string.IsNullOrWhiteSpace(ItemPrincipal.Precio))
+                {
+                    Error = "Escribe el PRECIO del ITEM";
+                }
+                else if (string.IsNullOrWhiteSpace(ItemPrincipal.Nombre_Empresa_Vende))
+                {
+                    Error = "Escribe el NOMBRE de la empresa en la que se encuentra el ITEM";
+                }
+                else if (string.IsNullOrWhiteSpace(ItemPrincipal.Descripción))
+                {
+                    Error = "Escribe una breve DESCRIPCIÓN del ITEM";
+                }
+                else if (string.IsNullOrWhiteSpace(ItemPrincipal.Numero_De_Reviews))
+                {
+                    Error = "Escribe la cantidad de REVIEWS que tiene el ITEM";
+                }
+                else if (!(string.IsNullOrWhiteSpace(ItemPrincipal.Numero_De_Reviews)))
+                {
+                    //string x = ItemPrincipal.Numero_De_Reviews;
+                    //ItemPrincipal.Numero_De_Reviews = x + " " + "Reviews";
+                    //string y = ItemPrincipal.Precio;
+                    //ItemPrincipal.Precio = "$" + y;
+                    if (obj[0] == false && obj[1] == false && obj[2] == false && obj[3] == false && obj[4] == false)
+                    {
+                        Error = "Selecciona una MEDIDA para el ITEM, puedes elegir 'UX' si no aplica ninguna medida";
+                    }
+                    if (string.IsNullOrWhiteSpace(Error)) //Agregar
+                    {
+                        if (obj[0])
+                        {
+                            ItemPrincipal.Tamaño = 0;
+                        }
+                        else if (obj[1])
+                        {
+                            ItemPrincipal.Tamaño = 1;
+                        }
+                        else if (obj[2])
+                        {
+                            ItemPrincipal.Tamaño = 2;
+                        }
+                        else if (obj[3])
+                        {
+                            ItemPrincipal.Tamaño = 3;
+                        }
+                        else if (obj[4])
+                        {
+                            ItemPrincipal.Tamaño = 4;
+                        }
+                        ToSave(0);
+                    }
+                }
+            }
+            Change();
+            Error = "";
+        }
+        private void Edit(Item obj)
+        {
+            //Clonar
+            indice = Lista.IndexOf(obj);
+            ItemPrincipal = new Item()
+            {
+                Nombre_Item = obj.Nombre_Item,
+                Nombre_Empresa_Vende = obj.Nombre_Empresa_Vende,
+                Numero_De_Reviews = obj.Numero_De_Reviews,
+                Devolucion_Gratis_SioNo = obj.Devolucion_Gratis_SioNo,
+                Envio_Gratis_SioNo = obj.Envio_Gratis_SioNo,
+                Descripción = obj.Descripción,
+                Precio = obj.Precio,
+                Tamaño = obj.Tamaño,
+                FaltanteURL1 = obj.FaltanteURL1,
+                FaltanteURL2 = obj.FaltanteURL2,
+                URL_Completa = obj.URL_Completa
+            };
+
+            vistaEditar = new EditarItemView()
+            {
+                BindingContext = this
+            };
+            Application.Current.MainPage.Navigation.PushAsync(vistaEditar);
+        }
+
+        private void ToSave(int obj)
+        {
+            Lista[indice] = ItemPrincipal; //Remplaza el original por el clon
+            Serializar();
+            App.Current.MainPage.Navigation.PopToRootAsync();
+        }
+
+        private void TapShowDetails(Item obj)
+        {
+            vistaDetalles = new DetallesItemView()
+            {
+                BindingContext = obj
+            };
+            App.Current.MainPage.Navigation.PushAsync(vistaDetalles);
+        }
+
+        private void Eliminar(Item obj)
+        {
+            if (obj != null)
+            {
+                Lista.Remove(obj);
+                Serializar();
+            }
         }
 
         //private void Tap(string obj)
@@ -88,50 +245,60 @@ namespace MVVMobil.ViewModels
             }
             Change();
         }
-
+        
         //PAGES
         AgregarItemView vistaItem;
+        DetallesItemView vistaDetalles;
+        EditarItemView vistaEditar;
 
         private void Agregar(bool[] obj)
         {
             if (ItemPrincipal != null)
             {
+                string xx = ItemPrincipal.FaltanteURL1 + ItemPrincipal.FaltanteURL2;
+                if (Uri.IsWellFormedUriString(xx, UriKind.Absolute))
+                {
+                    ItemPrincipal.URL_Completa = xx;
+                }
+                else
+                {
+                    Error = "Ingresa una URL válida para la imagen del ITEM";
+                }
+                
                 if (Error == "Selecciona si el ITEM incluye ENVÍO GRATIS o no")
                 {
                     Error = "Selecciona si el ITEM incluye ENVÍO GRATIS o no";
                 }
-                if (Error == "Selecciona si el ITEM incluye GASTOS DE DEVOLUCIÓN GRATUITOS")
+                else if (Error == "Selecciona si el ITEM incluye GASTOS DE DEVOLUCIÓN GRATUITOS")
                 {
                     Error = "Selecciona si el ITEM incluye GASTOS DE DEVOLUCIÓN GRATUITOS";
                 }
-                
-                if (string.IsNullOrWhiteSpace(ItemPrincipal.Nombre_Item))
+                else if (string.IsNullOrWhiteSpace(ItemPrincipal.Nombre_Item))
                 {
                     Error = "Escribe el NOMBRE del ITEM";
                 }
-                if ( string.IsNullOrWhiteSpace(ItemPrincipal.Precio))
+                else if ( string.IsNullOrWhiteSpace(ItemPrincipal.Precio))
                 {
                     Error = "Escribe el PRECIO del ITEM";
                 }
-                if (string.IsNullOrWhiteSpace(ItemPrincipal.Nombre_Empresa_Vende))
+                else if (string.IsNullOrWhiteSpace(ItemPrincipal.Nombre_Empresa_Vende))
                 {
                     Error = "Escribe el NOMBRE de la empresa en la que se encuentra el ITEM";
                 }
-                if (string.IsNullOrWhiteSpace(ItemPrincipal.Descripción))
+                else if (string.IsNullOrWhiteSpace(ItemPrincipal.Descripción))
                 {
                     Error = "Escribe una breve DESCRIPCIÓN del ITEM";
                 }
-                if (string.IsNullOrWhiteSpace(ItemPrincipal.Numero_De_Reviews))
+                else if (string.IsNullOrWhiteSpace(ItemPrincipal.Numero_De_Reviews))
                 {
                     Error = "Escribe la cantidad de REVIEWS que tiene el ITEM";
                 }
-                
-                if (!(string.IsNullOrWhiteSpace(ItemPrincipal.Numero_De_Reviews) || !(Error == "")))
+                else if (!(string.IsNullOrWhiteSpace(ItemPrincipal.Numero_De_Reviews)))
                 {
-                    string x = ItemPrincipal.Numero_De_Reviews;
-                    ItemPrincipal.Numero_De_Reviews = x + " " + "Reviews";
-                    string y = ItemPrincipal.Precio;
-                    ItemPrincipal.Precio = "$" + y;
+                    //string x = ItemPrincipal.Numero_De_Reviews;
+                    //ItemPrincipal.Numero_De_Reviews = x + " " + "Reviews";
+                    //string y = ItemPrincipal.Precio;
+                    //ItemPrincipal.Precio = "$" + y;
                     if (obj[0] == false && obj[1] == false && obj[2] == false && obj[3] == false && obj[4] == false)
                     {
                         Error = "Selecciona una MEDIDA para el ITEM, puedes elegir 'UX' si no aplica ninguna medida";
@@ -191,9 +358,9 @@ namespace MVVMobil.ViewModels
             {
                 EstadoVista = "Agregado1";
             }
-            else if (vista == "Agregado2")
+            else if (vista == "Editar")
             {
-                EstadoVista = "Agregado2";
+                
             }
             else if (vista == "Agregado3")
        

@@ -1,8 +1,18 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Application xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="MVVMobil.App">
+             x:Class="MVVMobil.App"
+             xmlns:magic="http://magic.com/schemas/gradients">
     <Application.Resources>
-
+        <!--<Grid x:Key="GradientPage">
+            <magic:GradientView VerticalOptions="FillAndExpand">
+                <magic:CssGradientSource>
+                    <![CDATA[
+                        linear-gradient(to top, #9be15d 0%, #00e3ae 100%)
+                    ]]>
+                </magic:CssGradientSource>
+            </magic:GradientView>
+            <ContentPresenter></ContentPresenter>
+        </Grid>-->
     </Application.Resources>
 </Application>

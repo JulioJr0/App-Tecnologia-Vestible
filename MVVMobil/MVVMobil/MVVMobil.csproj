@@ -18,6 +18,8 @@
     <None Remove="Fontss\Rubik-VariableFont_wght.ttf" />
     <None Remove="Fontss\SawarabiGothic-Regular.ttf" />
     <None Remove="Fonts\BebasNeue-Regular.ttf" />
+    <None Remove="Resources\440-4403395_no-game-no-life-shiro-art-hd-png.png" />
+    <None Remove="Resources\logo_dev.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -26,9 +28,11 @@
     <EmbeddedResource Include="Fontss\Mada-ExtraLight.ttf" />
     <EmbeddedResource Include="Fontss\Rubik-VariableFont_wght.ttf" />
     <EmbeddedResource Include="Fontss\SawarabiGothic-Regular.ttf" />
+    <EmbeddedResource Include="Resources\logo_dev.png" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="MagicGradients" Version="1.3.1" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="Xamarin.CommunityToolkit" Version="2.0.2" />
     <PackageReference Include="Xamarin.Forms" Version="5.0.0.2478" />
@@ -38,6 +42,7 @@
   <ItemGroup>
     <Resource Include="Assets\BebasNeue-Regular.ttf" />
     <Resource Include="Fonts\BebasNeue-Regular.ttf" />
+    <Resource Include="Resources\440-4403395_no-game-no-life-shiro-art-hd-png.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -53,12 +58,5 @@
     <EmbeddedResource Update="Views\ListaItemsView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\Page4.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Resources\" />
   </ItemGroup>
 </Project>
